@@ -270,8 +270,9 @@ header{
 
 .monthFree{
     position: absolute;
-    top: -3px;
-    left: 40%;
+    top: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-weight: 600;
 }
 

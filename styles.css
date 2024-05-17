@@ -1,0 +1,667 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 2px;
+    box-sizing: border-box;
+    font-family: "Assistant", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}
+
+  
+
+body{
+    max-width: 100vw;
+    background-color: #d0d0d0;
+}
+
+/* Estilos del Navbar */
+header{
+    position: fixed;
+    opacity: .9;
+    width: 100vw;
+    z-index: 3;
+}
+.nav-bar {
+    position: sticky;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.nav-bar li a {
+    text-decoration: none;
+    color: black;
+    font-family: "Assistant", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.active{
+    color: white !important;
+    transition: color .3s ease;
+}
+
+/* .nav-bar li a:hover {
+    color: white;
+} */
+
+.logo {
+    margin-right: auto;
+    margin-left: 2%;
+}
+
+.logo a img{
+    height: 68px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    margin-right: 3%;
+}
+
+.menu li {
+    margin-right: 50px;
+}
+
+.menu li:last-child {
+    margin-right: 0;
+}
+
+.open-menu {
+    display: none;
+}
+
+.close-menu {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+.fas .fa-bars {
+    display: none;
+}
+
+/* Estilos main */
+.main{
+    width: 100%;
+}
+
+/* Estilos de Home */
+#home{
+    /* margin-top: 10vh; */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    background-image: url(img/fondos/4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.titleSlogan{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+    color: white;
+    height: 40%;
+    text-align: center;
+}
+
+.title{
+    font-size: 5em;
+}
+
+.slogan{
+    font-weight: 300;
+}
+
+.imgBanner{
+    width: 60%;
+    height: 100%;
+    /* background-image: url(img/fondos/4.jpg); */
+    /* background-size: cover; */
+    border-radius: .6em;
+}
+
+.imgBanner img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: .6em;
+}
+
+/* Estilos de about us */
+#aboutUs{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* .titleAboutUs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+    color: white;
+    height: 40%;
+} */
+
+#aboutUs h1{
+    font-size: 40px;
+}
+
+.imgTextContainer{
+    display: flex;
+    width: 80%;
+    height: 70%;
+    justify-content: space-evenly;
+}
+
+.imgGym{
+    width: 40%;
+    height: 100%;
+    background-image: url(img/fondos/foto-gym.jpg);
+    background-size: cover;
+    border-radius: .9em;
+    /* margin-right: 55px; */
+    position: relative;
+}
+
+
+.aboutUsText{
+    /* margin: 25px 35px; */
+    font-size: 18px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    /* color: black; */
+}
+
+/* Estilos de pricing */
+#pricing{
+    height: 170vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#pricing ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+    padding-left: 1em;
+}
+
+#pricing ul li::before{
+    content: "\f178";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.5em;
+    width: 1.5em;
+}
+
+.pricingContainers{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 48%;
+    align-items: center;
+    width: 100%;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    height: 85%;
+}
+
+.card{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    border: 1px solid black;
+    border-radius: .6em;
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 15px 5px rgba(0,0,0,0.32);
+    position: relative;
+}
+
+.monthFree{
+    position: absolute;
+    top: -3px;
+    left: 40%;
+    font-weight: 600;
+}
+
+.membership{
+    justify-content: space-around;
+}
+
+.personalTrainer{
+    justify-content: start;
+}
+
+.divImgPersonalTrainer{
+    width: 100%;
+    height: 55%;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+}
+
+.divImgPersonalTrainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+}
+
+.yoga img{
+    object-position: center;
+}
+
+.gym{
+    background-color: black;
+}
+.gym img{
+    object-fit: contain;
+}
+
+.descPriceContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 45%;
+}
+
+.nameSpecialty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.specialtyPersonalTrainer{
+    width: 80%;
+    margin-top: .3em;
+    border-bottom: 1px solid black;
+    font-weight: 300;
+}
+
+
+.listOfBenefits, .descriptionPersonalTrainer{
+    width: 80%;
+}
+
+.descriptionPersonalTrainer{
+    text-align: center;
+}
+
+.priceButton{
+    display: flex;
+    height: 10%;
+    width: 80%;
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+
+.descPriceContainer .priceButton{
+    height: 22%;
+}
+
+.price{
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.price span{
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.buyButton{
+    border: 1px solid black;
+    color: black;
+    border-radius: .3em;
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+    transition: border .5s ease, color .5s ease, background-color .5s ease;
+    background-color: transparent;
+}
+
+.buyButton:hover{
+    background-color: black;
+    color: white;
+}
+
+
+
+
+
+/* Estilos de galery */
+
+#galery{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.galeryContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .6em;
+    width: 80%;
+}
+
+.galeryContainer img {
+    width: 270px;
+    height: 220px; /* Altura deseada de las imágenes */
+    object-fit: cover; /* Opción 1: Ajustar el tamaño recortando la imagen */
+    /* background-size: cover; */ /* Opción 2: Si prefieres utilizar background-size */
+    margin-bottom: 10px; /* Espacio entre las imágenes */
+    border-radius: .6em; /* Borde de las imágenes */
+    outline: 3px solid black;
+    transition: transform 0.5s ease; 
+}
+
+.galeryContainer img:hover{
+    transform: scale(1.1);
+    border: 0;
+    outline: 3px solid lightgray;
+    box-shadow: 0px 2px 15px 5px rgba(0,0,0,0.72);
+}
+
+/* Estilos de contact */
+#contact{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3vh;
+    margin-top: 3em;
+}
+
+#contact h2 {
+    text-align: center;
+}
+
+
+.contactContainer {
+    width: 80%;
+    height: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #000000;
+    background-color: #f5f5f5;
+}
+
+#contactForm{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.importantContact, .miscContact{
+    width: 40%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact input[type="tel"],
+#contact textarea,
+#contact select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submitButton {
+    padding: 10px 30px;
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 30%;
+    transition: color .5s ease, background-color .5s ease;
+}
+
+.submitButton:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.radio-group {
+    display: flex;
+}
+
+.radio-group label {
+    margin-right: 10px;
+}
+
+#mensaje{
+    resize: none;
+    height: 80px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}  
+
+/* Estilos del footer */
+footer{
+    margin-top: 3em;
+}
+
+.foot {
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.5); 
+    color: black; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.foot i {
+    font-size: 24px; 
+    margin-right: 20px; 
+}
+
+.foot i:hover {
+    color: white;
+    cursor: pointer; 
+}
+
+
+@media screen and (max-width: 930px) {
+    .menu {
+        width: 80%;
+        display: none;
+        flex-direction: column-reverse;
+        align-items: center; /* Centra los elementos horizontalmente */
+        justify-content: center; /* Centra los elementos verticalmente */
+        position: fixed;
+        top: 0; /* Ancla el menú en la parte superior */
+        bottom: 0; /* Estira el menú hasta el final de la página */
+        right: 0; /* Establece el ancho del menú al 80% de la ventana */
+        margin-right: -35px;
+        text-align: center;
+        background-color: rgba(128, 128, 128, 0.8);
+        z-index: -1;
+    }
+    
+    .menu li {
+        padding: 10px 0; /* Ajusta el espacio interno de cada elemento del menú */
+        margin-bottom: 20px; 
+        display: block;
+        margin-right: 0;
+    }
+    
+    .open-menu {
+        display: block;
+        margin-right: 20px;
+        font-size: 24px; 
+    }
+
+    .close-menu {
+        display: none; 
+        margin-right: 20px;
+    }
+
+    .menu-open .menu {
+        display: flex; 
+        flex-direction: column;
+        position: absolute;
+        top: 10vh;
+        left: 0;
+        right: 0;
+        background-color: gray;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .menu-open .menu li {
+        margin-right: 0; 
+        margin-bottom: 10px; 
+
+    }
+
+
+
+
+}
+
+@media screen and (max-width:480px) {
+    .logo a img{
+        height: 49px;
+        width: 100px;
+        object-fit: contain;
+    }
+    #pricing{
+        height: 500vh;
+    }
+    .cards{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card{
+        width: 70%;
+        height: 32%;
+    }
+    .buyButton{
+        height: 80%;
+    }
+    #aboutUs{
+        height: 130vh;
+    }
+    .imgTextContainer{
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgGym{
+        height: 40%;
+        width: 100%;
+    }
+    .aboutUsText{
+        width: 95%;
+        text-align: center;
+    }
+    .submitButton {
+        padding: 10px 0;
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    #contact{
+        height: auto;
+    }
+    #contactForm{
+        flex-direction: column;
+        align-items: center;
+    }
+    .importantContact, .miscContact {
+        width: 80%;
+    }
+    #imagen{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:900px) and (min-width:481px){
+    #pricing{
+        height: 500vh;
+    }
+    .cards{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card{
+        width: 55%;
+        height: 32%;
+    }
+}
+

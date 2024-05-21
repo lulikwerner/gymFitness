@@ -33,6 +33,8 @@ header{
 }
 .nav-bar {
     position: sticky;
+    display: flex;
+    justify-content: flex-end; 
     list-style: none;
     margin: 0;
     padding: 0;
@@ -43,23 +45,26 @@ header{
     background-color: rgba(128, 128, 128, 0.5);
 }
 
-.nav-bar li a {
-    text-decoration: none;
+.nav-bar .menu a {
     color: black;
     font-family: "Assistant", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-}
+    text-decoration: none;
+    color: black; 
+    margin-right: 20px; 
+  }
+  
+  .nav-bar .logo {
+    margin-right: auto; 
+  }
+
 
 .active{
     color: white !important;
     transition: color .3s ease;
 }
-
-/* .nav-bar li a:hover {
-    color: white;
-} */
 
 .logo {
     margin-right: auto;
@@ -70,20 +75,6 @@ header{
     height: 68px;
     width: 100px;
     object-fit: contain;
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    margin-right: 3%;
-}
-
-.menu li {
-    margin-right: 50px;
-}
-
-.menu li:last-child {
-    margin-right: 0;
 }
 
 .open-menu {
@@ -542,20 +533,31 @@ footer{
         width: 80%;
         display: none;
         flex-direction: column-reverse;
-        align-items: center; /* Centra los elementos horizontalmente */
-        justify-content: center; /* Centra los elementos verticalmente */
+        align-items: center;
+        justify-content: center; 
         position: fixed;
-        top: 0; /* Ancla el menú en la parte superior */
-        bottom: 0; /* Estira el menú hasta el final de la página */
-        right: 0; /* Establece el ancho del menú al 80% de la ventana */
+        top: 0; 
+        bottom: 0; 
+        right: 0; 
         margin-right: -35px;
         text-align: center;
-        background-color: rgba(128, 128, 128, 0.8);
+        background-color: rgba(128, 128, 128, 0.9);
         z-index: -1;
+    }
+
+
+    
+    .nav-bar .menu li a {
+        margin-right: 20px; 
+      }
+    .navItem{
+        margin-bottom: 8%;
+        margin-top: 8%;
+        font-size: 18px;
     }
     
     .menu li {
-        padding: 10px 0; /* Ajusta el espacio interno de cada elemento del menú */
+        padding: 40px 0; 
         margin-bottom: 20px; 
         display: block;
         margin-right: 0;
@@ -580,14 +582,13 @@ footer{
         left: 0;
         right: 0;
         background-color: gray;
-        padding: 10px;
+        padding: 30px;
         z-index: 1;
     }
 
     .menu-open .menu li {
         margin-right: 0; 
         margin-bottom: 10px; 
-
     }
 
 

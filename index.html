@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" sizes="32x32"  href="img/favicons/favicon-16x16.png">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +19,7 @@
         <nav>
             <ul class="nav-bar">
                 <li class="logo"><a href="#home"><img src="img/logos/logo2.jpg" alt="logo"></a></li>
-                <input type="checkbox" id="check">
+                <!-- <input type="checkbox" id="check"> -->
                 <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
                 <div class="menu">
                     <li><a href="#home" class="navItem active">INICIO</a></li>
@@ -242,15 +245,17 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="radio">¿Cómo nos conociste?</label>
-                            <div id="radio" class="radio-group">
-                                <input type="radio" id="internet" name="internet" value="Internet" required>
-                                <label for="internet">Internet</label>
-                                <input type="radio" id="amigo" name="amigo" value="Amigo">
-                                <label for="amigo">Amigo</label>
-                                <input type="radio" id="publicidad" name="publicidad" value="Publicidad">
-                                <label for="publicidad">Publicidad</label>
-                            </div>
+                            <fieldset>
+                                <legend>¿Cómo nos conociste?</legend>
+                                <div id="radio" class="radio-group">
+                                    <input type="radio" id="internet" name="internet" value="Internet" required>
+                                    <label for="internet">Internet</label>
+                                    <input type="radio" id="amigo" name="amigo" value="Amigo">
+                                    <label for="amigo">Amigo</label>
+                                    <input type="radio" id="publicidad" name="publicidad" value="Publicidad">
+                                    <label for="publicidad">Publicidad</label>
+                                </div>
+                            </fieldset>
                         </div>
                         <div class="form-group">
                             <label for="imagen">Adjuntar fotografía:</label>

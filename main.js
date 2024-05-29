@@ -1,18 +1,69 @@
 // Codigo Contact
-function validateForm() {
-    let nombre = document.getElementById('nombre').value;
-    let email = document.getElementById('email').value;
-    let telefono = document.getElementById('telefono').value;
-    let consulta = document.getElementById('mensaje').value;
-    let motivo = document.getElementById('sede').value;
-    let conocimiento = document.querySelector('input[name="conocimiento"]:checked');
+// function validateForm() {
+//     let nombre = document.getElementById('nombre').value;
+//     let email = document.getElementById('email').value;
+//     let telefono = document.getElementById('telefono').value;
+//     let consulta = document.getElementById('mensaje').value;
+//     let motivo = document.getElementById('sede').value;
+//     let conocimiento = document.querySelector('input[name="conocimiento"]:checked');
   
-    if (!nombre || !email || !telefono || !mensaje || !sede || !conocimiento) {
-      alert('Todos los campos son obligatorios');
-      return false;
+//     if (!nombre || !email || !telefono || !mensaje || !sede || !conocimiento) {
+//       alert('Todos los campos son obligatorios');
+//       return false;
+//     }
+//     return true;
+// }
+function validateForm() {
+const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+    const sede = document.getElementById('sede').value;
+    const conociste = document.querySelector('input[name="conociste"]:checked');
+
+    if (nombre === "") {
+        alert("Por favor, ingrese su nombre y apellido.");
+        return false;
     }
+
+    if (email === "") {
+        alert("Por favor, ingrese su email.");
+        return false;
+    }
+
+    if (!validateEmail(email)) {
+        alert("Por favor, ingrese un email válido.");
+        return false;
+    }
+
+    if (telefono === "") {
+        alert("Por favor, ingrese su teléfono.");
+        return false;
+    }
+
+    if (mensaje === "") {
+        alert("Por favor, ingrese un mensaje.");
+        return false;
+    }
+
+    if (sede === "") {
+        alert("Por favor, seleccione una sede.");
+        return false;
+    }
+
+    if (conociste === null) {
+        alert("Por favor, seleccione cómo nos conoció.");
+        return false;
+    }
+
     return true;
 }
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
 
 // Codigo Nav y footer
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,25 +1,12 @@
 // Codigo Contact
-// function validateForm() {
-//     let nombre = document.getElementById('nombre').value;
-//     let email = document.getElementById('email').value;
-//     let telefono = document.getElementById('telefono').value;
-//     let consulta = document.getElementById('mensaje').value;
-//     let motivo = document.getElementById('sede').value;
-//     let conocimiento = document.querySelector('input[name="conocimiento"]:checked');
-  
-//     if (!nombre || !email || !telefono || !mensaje || !sede || !conocimiento) {
-//       alert('Todos los campos son obligatorios');
-//       return false;
-//     }
-//     return true;
-// }
 function validateForm() {
-const nombre = document.getElementById('nombre').value.trim();
+    const nombre = document.getElementById('nombre').value.trim();
     const email = document.getElementById('email').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
     const mensaje = document.getElementById('mensaje').value.trim();
     const sede = document.getElementById('sede').value;
     const conociste = document.querySelector('input[name="conociste"]:checked');
+    const inputFile = document.querySelector('input[type="file"]');
 
     if (nombre === "") {
         alert("Por favor, ingrese su nombre y apellido.");
@@ -55,6 +42,21 @@ const nombre = document.getElementById('nombre').value.trim();
         alert("Por favor, seleccione cómo nos conoció.");
         return false;
     }
+
+    inputFile.addEventListener('change', function(event) {
+        if (event.target.files.length === 0) {
+          alert("Por favor, seleccione una imagen suya.");
+          return false; // Salir de la función si no se seleccionó ningún archivo
+        }
+      
+        const file = event.target.files[0];
+      
+        if (!file.type.startsWith('image/')) {
+          alert('Solo se permiten imágenes.');
+          inputFile.value = '';
+          return false;
+        }
+    });
 
     return true;
 }

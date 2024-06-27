@@ -1,5 +1,5 @@
 import express from 'express';
-import UserRoutes from '../routes/users.routes.js';
+import UserRoutes from '../routes/Users.routes.js';
 import ProductRoutes from '../routes/Products.routes.js'
 
 export default class Server {

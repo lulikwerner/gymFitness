@@ -10,9 +10,21 @@ export default class UsersDaoMemory{
 getAllUsers(){
     return this.users
 }
+getUserById(id){
+    const result = this.users.find(user => user.id === parseInt(id))
+    return result
+}
+
+getUserByName(username){
+    const result = this.users.find(user => user.username === username)
+    return result
+}
 
 addUser(user) {
-    this.push(user)
+    user = { ...user}
+    //user = {id:id++, ...user}
+   // this.push(user)
+   this.users.push(user);
     return user
 }
 

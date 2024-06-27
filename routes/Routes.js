@@ -5,4 +5,5 @@ export default class Routes{
     constructor(){
         this.router = Router()
     }
+    
 }

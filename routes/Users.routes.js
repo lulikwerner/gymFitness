@@ -1,20 +1,23 @@
-import UsersControllers from "../controllers/Users.controllers.js";
+import express from 'express';
 import Routes from "./Routes.js";
+import UsersControllers from "../controllers/Users.controllers.js";
 
-export default class UserRoutes extends Routes{
+export default class UserRoutes extends Routes {
 
-    constructor(){
-        super() //es para poder extender de Routes y usar eso
+    constructor() {
+        super(); // Llama al constructor de la clase base
         this.controller = new UsersControllers();
-        this.getRoutes()
+        this.getRouter(); // Llama al método para configurar las rutas
     }
 
-    getRoutes(){
+    getRouter() {
         this.router
-       .get('/', this.controller.getAllUsers)
-        .post('/', this.controller.addUser)
-        .put('/', this.controller.updateUser)
-        .delete('/:id', this.controller.deleteUser)
+            .get('/', this.controller.getAllUsers) 
+            .get('/:id', this.controller.getUsersById) 
+            .post('/', this.controller.addUser)
+            .put('/', this.controller.updateUser)
+            .delete('/:id', this.controller.deleteUser);
+        return this.router;
     }
 
 }

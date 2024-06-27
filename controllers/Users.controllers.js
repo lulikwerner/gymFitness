@@ -13,9 +13,19 @@ export default class UsersControllers{
 
         this.userHelpers = new UsersHelpers()
     }
+    /**
+     * 
+     * @param {Request} req 
+     * @param {Response} res 
+     */
     getAllUsers = async(req, res) => {
         const users = await this.db.getAllUsers()
         res.json(users)
+    }
+    getUsersById = async(req, res) => {
+       const{id} = req.params
+       const result = this.db.getUserById(id)
+       res.json(result)
     }
     
     addUser = async (req,res) => {

@@ -9,13 +9,16 @@ export default class UsersDaoMysql extends MySql {
 
     #createTable() {
         const query = `CREATE TABLE IF NOT EXISTS ${this.table} (
-            dni INT NOT NULL PRIMARY KEY,
+            iduser INT AUTO_INCREMENT PRIMARY KEY,
+            dni INT NOT NULL UNIQUE,
             name VARCHAR(100) NOT NULL,
             lastname VARCHAR(100) NOT NULL,
             email VARCHAR(100) NOT NULL,
             age INT NOT NULL,
             password VARCHAR(100) NOT NULL,
-            imagen VARCHAR(255)
+            imagen VARCHAR(255),
+            fk_idplan INT NOT NULL DEFAULT 1,
+            FOREIGN KEY (fk_idplan) REFERENCES plan(idplan)
         )`;
         this.connection.query(query);
     }

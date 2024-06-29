@@ -20,18 +20,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const data = await response.json();
-        console.log('ladata', data)
-        const user = data.user; // Aquí asumo que 'data' tiene la estructura que mencionaste
-console.log('eluser')
+        const user = data.user; 
 console.log(user)
         // Mostrar la información del usuario en el HTML
         const userProfileDiv = document.getElementById('userProfile');
         userProfileDiv.innerHTML = `
+        <div>
+            <p> ${user.image}</p>
+            
             <p><strong>Nombre:</strong> ${user.name}</p>
             <p><strong>Apellido:</strong> ${user.lastname}</p>
             <p><strong>Email:</strong> ${user.email}</p>
             <p><strong>Edad:</strong> ${user.age}</p>
-            <!-- Agrega más campos según sea necesario -->
+            <p><strong>Plan:</strong> ${user.fk_idplan}</p>
+            </div>
         `;
     } catch (error) {
         console.error('Error al obtener perfil de usuario:', error);

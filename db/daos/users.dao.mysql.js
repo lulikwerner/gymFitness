@@ -67,9 +67,9 @@ export default class UsersDaoMysql extends MySql {
         return result;
     }
 
-    async deleteUser(dni) {
-        const query = `DELETE FROM ${this.table} WHERE dni = ?`;
-        const [result] = await this.connection.promise().query(query, [dni]);
+    async deleteUser(id) {
+        const query = `DELETE FROM ${this.table} WHERE iduser = ?`;
+        const [result] = await this.connection.promise().query(query, [id]);
         return result;
     }
 }

@@ -101,7 +101,8 @@ export default class SessionControllers {
             const user = await this.db.getUserByEmail(email);
     
             if (!user) {
-                return res.status(404).json({ error: 'Usuario o Contraseña incorrecta' });
+                return res.redirect(`/register.html`);
+               // return res.status(404).json({ error: 'No existe el usuario' });
             }
     
             // Compara la contraseña ingresada con la contraseña almacenada hasheada
@@ -137,16 +138,10 @@ export default class SessionControllers {
 
     //FALTA HACER LA PARTE CON SESSION
     logout = (req, res) => {
-        console.log('sesion',req.session);
-
-        req.session.destroy(err => {
-            if (err) {
-                console.error('Error al cerrar sesión:', err);
-                return res.status(500).json({ error: 'Error interno del servidor' });
-            }
-            res.status(200).json({ message: 'Sesión cerrada correctamente' });
-        });
+        res.cookie('jwt', '', { expires: new Date(0), httpOnly: true });
+        console.log('cerrando')
  // Limpio la cookie JWT
    res.clearCookie('jwt-token');
+   res.redirect(`/index.html`);
     };
 }

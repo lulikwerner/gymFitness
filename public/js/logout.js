@@ -5,9 +5,8 @@ document.getElementById('logoutButton').addEventListener('click', async () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ /* datos adicionales */ })
+        body: JSON.stringify({  })
       });
-console.log('ELRESPONSE',response)
       if (response.ok) {
         console.log('oka')
         // Manejar el éxito del logout, como redirigir al usuario

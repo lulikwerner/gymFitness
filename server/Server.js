@@ -1,6 +1,6 @@
 import express from 'express';
 import UserRoutes from '../routes/Users.routes.js';
-import ProductRoutes from '../routes/Products.routes.js'
+//import ProductRoutes from '../routes/Products.routes.js'
 
 export default class Server {
     constructor() {
@@ -16,9 +16,9 @@ export default class Server {
 
     setupRoutes() {
         const usersRoutes = new UserRoutes();
-        const productsRoutes = new ProductRoutes();
+        //const productsRoutes = new ProductRoutes();
         this.app.use('/users', usersRoutes.router); // Assuming UserRoutes has a router property
-        this.app.use('/products', productsRoutes.router);
+       // this.app.use('/products', productsRoutes.router);
     }
 
     run(port) {

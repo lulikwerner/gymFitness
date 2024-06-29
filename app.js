@@ -2,7 +2,8 @@ import express from 'express'
 import Server from './server/Server.js'
 import dotenv from 'dotenv'
 // import { authRoutes } from './auth/index.js';
-import session from "express-session"
+//import session from "express-session"
+import passport from './config/passport.js'
 import SessionRouter from "./routes/Session.routes.js"
 import UserRouter from "./routes/Users.routes.js"
 
@@ -18,6 +19,7 @@ const server = new Server();
 app.use(express.static('public'))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(passport.initialize());
 
 // Crear las instancias de las rutas
 const sessionRouter = new SessionRouter();

@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 import UsersDaoMemory from '../db/daos/users.dao.memory.js';
 import UsersDaoMysql from '../db/daos/users.dao.mysql.js';
 import UsersHelpers from '../helpers/users.helpers.js';
@@ -19,6 +21,9 @@ export default class SessionControllers {
 
         this.userHelpers = new UsersHelpers();
     }
+
+
+
     register = async (req, res) => {
         console.log(req.body);
         try {
@@ -43,6 +48,7 @@ export default class SessionControllers {
             if (password !== password2) {
                 return res.status(400).json({ error: 'Las contraseñas no coinciden' });
             }
+            //Busco si el usuario existe en mi db
             const userExist = await this.db.getUserByEmail(email);
             if(!userExist){
             const hash = bcrypt.hashSync(password, 10); // Asegúrate de especificar el número de saltos
@@ -64,15 +70,16 @@ export default class SessionControllers {
     
     
 
-    login = async (req, res) => {
+    
+   login = async (req, res) => {
         const { email, password } = req.body;
     
         try {
-            // Implementa la lógica para buscar el usuario por su correo electrónico en la base de datos
+            // Busca el usuario por correo electrónico en la base de datos
             const user = await this.db.getUserByEmail(email);
     
             if (!user) {
-                return res.status(404).json({ error: 'Usuario no encontrado' });
+                return res.status(404).json({ error: 'Usuario o Contraseña incorrecta' });
             }
     
             // Compara la contraseña ingresada con la contraseña almacenada hasheada
@@ -81,16 +88,34 @@ export default class SessionControllers {
             if (!passwordMatch) {
                 return res.status(401).json({ error: 'Usuario o Contraseña incorrecta' });
             }
-            if(email!='admin@admin.com'){
-            res.redirect('/profile.html');
-            }else{
-                res.redirect('/admin.html');
+    
+            // Genera el token JWT
+            const token = jwt.sign({ email: user.email, id: user.dni }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
+    // Configura la cookie
+    res.cookie('token', token, {
+        httpOnly: true, 
+        secure: true, 
+        sameSite: 'None', 
+        maxAge: 3600000 
+    });
+            // Enviar el token al frontend
+            if (email !== 'admin@admin.com') {
+               // return res.status(200).json({ message: 'Usuario logeado correctamente', token, data: user });
+              res.redirect(`/profile.html?token=${token}`);
+               // Enviar el token y los datos del usuario al frontend
+       // res.status(200).json({ message: 'Usuario logeado correctamente', token, user });
+            } else {
+                return res.status(200).json({ message: 'Administrador logeado correctamente', token, data: user });
+       
             }
         } catch (error) {
             console.error('Error al intentar iniciar sesión:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     };
+    
+
+    
     
 
 
@@ -105,8 +130,7 @@ export default class SessionControllers {
             }
             res.status(200).json({ message: 'Sesión cerrada correctamente' });
         });
-    //Cuando usemos cookies
-        // O si usas JWT (JSON Web Tokens), puedes simplemente limpiar la cookie o el token:
-        // res.clearCookie('jwt-token'); // Ejemplo para limpiar una cookie JWT
+ // Limpio la cookie JWT
+   res.clearCookie('jwt-token');
     };
 }

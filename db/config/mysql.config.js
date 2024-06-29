@@ -1,3 +1,4 @@
+//PASAR A VARIABLE DE ENTORNO
 const config ={
     host: 'localhost',//ruta del servidor cuando lo suba
     user: 'root',

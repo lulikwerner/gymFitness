@@ -218,8 +218,12 @@
                 <form id="contactForm" onsubmit="return validateForm()">
                     <div class="importantContact">
                         <div class="form-group">
-                            <label for="nombre">Nombre y apellido:</label>
+                            <label for="nombre">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" autocomplete="on">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Apellido:</label>
+                            <input type="text" id="lastname" name="lastname" autocomplete="on">
                         </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
@@ -236,14 +240,12 @@
                     </div>
                     <div class="miscContact">
                         <div class="form-group">
-                            <label for="sede">Seleccionar sede:</label>
-                            <select id="sede" name="sede">
-                                <option value="">Sede</option>
-                                <option value="Olivos">Olivos</option>
-                                <option value="La Lucila">La Lucila</option>
-                                <option value="Martinez">Martínez</option>
-                                <option value="San Isidro">San Isidro</option>
-                                <option value="Tigre">Tigre</option>
+                            <label for="plan">Seleccionar plan:</label>
+                            <select id="plan" name="plan">
+                                <option value="">Plan</option>
+                                <option value="Basico">Basico</option>
+                                <option value="Gold">Gold</option>
+                                <option value="Platinum">Platinum</option>
                             </select>
                         </div>
                         <div class="form-group">

@@ -26,17 +26,17 @@ export default class UsersDaoMysql extends MySql {
         return result;
     }
 
-    async getUserById(dni) {
-        const query = `SELECT * FROM ${this.table} WHERE dni = ?`;
+    async getUserByEmail(email) {
+        const query = `SELECT * FROM ${this.table} WHERE email = ?`;
         try {
-            const [rows, fields] = await this.connection.promise().query(query, [dni]);
+            const [rows, fields] = await this.connection.promise().query(query, [email]);
             if (rows.length > 0) {
                 return rows[0];
             } else {
                 return null;
             }
         } catch (error) {
-            console.error('Error fetching user by DNI:', error);
+            console.error('Error fetching user by email:', error);
             throw error;
         }
     }
@@ -48,7 +48,7 @@ export default class UsersDaoMysql extends MySql {
     async addUser(user) {
         try {
             const { dni, name, lastname, email, age, password } = user;
-            const query = `INSERT INTO ${this.table} (dni, name, lastname, email, age, password) VALUES (?, ?, ?,?)`;
+            const query = `INSERT INTO ${this.table} (dni, name, lastname, email, age, password) VALUES (?, ?, ?, ?, ?, ?)`;
             const [result] = await this.connection.promise().query(query, [dni, name,lastname, email, age, password]);
             return result;
         } catch (error) {

@@ -71,10 +71,32 @@ export default class SessionControllers {
     
 
     
-   login = async (req, res) => {
+    login = async (req, res) => {
         const { email, password } = req.body;
-    
         try {
+            if (email === process.env.ADMIN_EMAIL) {
+                // Validar la contraseña del administrador
+                const isAdminPasswordCorrect = (password === process.env.ADMIN_PW);
+    
+                if (!isAdminPasswordCorrect) {
+                    return res.status(401).json({ error: 'Usuario o Contraseña incorrecta' });
+                }
+    
+                // Generar el token JWT para el administrador
+                const token = jwt.sign({ email: process.env.ADMIN_EMAIL, role: 'admin' }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
+    
+                // Configura la cookie
+                res.cookie('token', token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'None',
+                    maxAge: 3600000
+                });
+    
+                // Redirigir a la página del administrador
+                return res.redirect(`/admin.html?token=${token}`);
+            }
+    
             // Busca el usuario por correo electrónico en la base de datos
             const user = await this.db.getUserByEmail(email);
     
@@ -89,30 +111,24 @@ export default class SessionControllers {
                 return res.status(401).json({ error: 'Usuario o Contraseña incorrecta' });
             }
     
-            // Genera el token JWT
+            // Generar el token JWT para el usuario
             const token = jwt.sign({ email: user.email, id: user.dni }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
-    // Configura la cookie
-    res.cookie('token', token, {
-        httpOnly: true, 
-        secure: true, 
-        sameSite: 'None', 
-        maxAge: 3600000 
-    });
-            // Enviar el token al frontend
-            if (email !== 'admin@admin.com') {
-               // return res.status(200).json({ message: 'Usuario logeado correctamente', token, data: user });
-              res.redirect(`/profile.html?token=${token}`);
-               // Enviar el token y los datos del usuario al frontend
-       // res.status(200).json({ message: 'Usuario logeado correctamente', token, user });
-            } else {
-                return res.status(200).json({ message: 'Administrador logeado correctamente', token, data: user });
-       
-            }
+    
+            // Configura la cookie
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+                maxAge: 3600000
+            });
+    
+            // Redirigir a la página del usuario
+            res.redirect(`/profile.html?token=${token}`);
         } catch (error) {
-            console.error('Error al intentar iniciar sesión:', error);
-            res.status(500).json({ error: 'Error interno del servidor' });
+            return res.status(500).json({ error: 'Error en el servidor' });
         }
     };
+
     
 
     

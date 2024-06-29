@@ -21,8 +21,24 @@ export default class UsersControllers {
      * @param {Response} res 
      */
     getAllUsers = async (req, res) => {
+        console.log('buscando los usuarios')
+        try {
+
+            // Verificar y decodificar el token JWT del encabezado de autorización
+            const token = req.headers.authorization.split(' ')[1]; // Obtener el token del encabezado
+            const decodedToken = decodeToken(token);
+            const userEmail = decodedToken.email;
+            if(userEmail=== process.env.ADMIN_EMAIL){
         const users = await this.db.getAllUsers()
-        res.json(users)
+        res.status(200).json({ users });
+            }
+            else{
+                return res.status(403).json({ error: 'No tienes permisos suficientes' });
+            }
+    } catch (error) {
+        console.error('Error al obtener perfil de usuario:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
     }
     // Ruta para obtener el perfil del usuario autenticado
     getProfile = async (req, res) => {
@@ -34,14 +50,11 @@ export default class UsersControllers {
 
             // Acceder al ID del usuario desde el token decodificado
             const userEmail = decodedToken.email;
-            console.log(userEmail)
             // Buscar al usuario por su ID en la base de datos
             const user = await this.db.getUserByEmail(userEmail);
-            console.log('elsuer', user)
             if (!user) {
                 return res.status(404).json({ error: 'Usuario no encontrado' });
             }
-
             // Si el usuario se encuentra, responder con sus datos
             res.status(200).json({ user });
         } catch (error) {

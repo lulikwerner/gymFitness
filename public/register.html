@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" sizes="32x32"  href="./assets/img/favicons/favicon-16x16.png">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="./assets/styles/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/47e07fc3d8.js" crossorigin="anonymous"></script>
+
+        <title>Fitness Elite Gym</title>
+    </head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <li class="logo"><a href="#home"><img src="./assets/img/logos/logo2.jpg" alt="logo"></a></li>
+                <li><label class="open-menu"><i class="fas fa-bars"></i></label></li>
+                <li class="menu">
+                    <a href="./index.html" class="navItem active">INICIO</a>
+                    <a href="./login.html" class="navItem">INICIAR SESIÓN</a>
+                </li>
+                <li><label class="close-menu"><i class="fas fa-times"></i></label></li>
+            </ul>
+            
+        </nav>
+    </header>
+    <main >
+    <form class="register"action="./api/sessions/register" method="POST">
+        <div>
+            <label for="name">Nombre:</label>
+            <input id="name" name="name" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="lastname">Apellido:</label>
+            <input id="lastname" name="lastname" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="dni">DNI:</label>
+            <input id="dni" name="dni" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="age">Edad:</label>
+            <input id="age" name="age" type="number" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="password">Contraseña:</label>
+            <input id="password" name="password" type="password" autocomplete="on"></input>
+        </div>
+        <div>
+            <label for="password2">Ingrese la contraseña nuevamente:</label>
+            <input id="password2" name="password2" type="password" autocomplete="on"></input>
+        </div>
+        <button>Registrarse</button>
+    </form>
+    </main>
+    <footer>
+        <div class="foot">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    <!--boostrap?-->
+    </footer>
+</body>
+</html>

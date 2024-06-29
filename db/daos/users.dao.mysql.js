@@ -9,10 +9,13 @@ export default class UsersDaoMysql extends MySql {
 
     #createTable() {
         const query = `CREATE TABLE IF NOT EXISTS ${this.table} (
-            ID INT AUTO_INCREMENT PRIMARY KEY,
+            dni INT NOT NULL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
             email VARCHAR(100) NOT NULL,
-            age INT NOT NULL
+            age INT NOT NULL,
+            password VARCHAR(100) NOT NULL,
+            imagen VARCHAR(255)
         )`;
         this.connection.query(query);
     }
@@ -23,17 +26,17 @@ export default class UsersDaoMysql extends MySql {
         return result;
     }
 
-    async getUserById(id) {
-        const query = `SELECT * FROM ${this.table} WHERE id = ?`;
+    async getUserById(dni) {
+        const query = `SELECT * FROM ${this.table} WHERE dni = ?`;
         try {
-            const [rows, fields] = await this.connection.promise().query(query, [id]);
+            const [rows, fields] = await this.connection.promise().query(query, [dni]);
             if (rows.length > 0) {
                 return rows[0];
             } else {
                 return null;
             }
         } catch (error) {
-            console.error('Error fetching user by ID:', error);
+            console.error('Error fetching user by DNI:', error);
             throw error;
         }
     }
@@ -44,9 +47,9 @@ export default class UsersDaoMysql extends MySql {
  */
     async addUser(user) {
         try {
-            const { name, email, age } = user;
-            const query = `INSERT INTO ${this.table} (name, email, age, password) VALUES (?, ?, ?,?)`;
-            const [result] = await this.connection.promise().query(query, [name, email, age, password]);
+            const { dni, name, lastname, email, age, password } = user;
+            const query = `INSERT INTO ${this.table} (dni, name, lastname, email, age, password) VALUES (?, ?, ?,?)`;
+            const [result] = await this.connection.promise().query(query, [dni, name,lastname, email, age, password]);
             return result;
         } catch (error) {
             console.error('Error adding user:', error);
@@ -55,15 +58,15 @@ export default class UsersDaoMysql extends MySql {
     }
 
     async updateUser(data) {
-        const { id, name, email, age } = data;
-        const query = `UPDATE ${this.table} SET name = ?, email = ?, age = ? WHERE id = ?`;
-        const [result] = await this.connection.promise().query(query, [name, email, age, id]);
+        const { dni, name, lastname, email, age } = data;
+        const query = `UPDATE ${this.table} SET name = ?,lastname = ?, email = ?, age = ? WHERE dni = ?`;
+        const [result] = await this.connection.promise().query(query, [name, lastname, email, age, dni]);
         return result;
     }
 
-    async deleteUser(id) {
-        const query = `DELETE FROM ${this.table} WHERE ID = ?`;
-        const [result] = await this.connection.promise().query(query, [id]);
+    async deleteUser(dni) {
+        const query = `DELETE FROM ${this.table} WHERE dni = ?`;
+        const [result] = await this.connection.promise().query(query, [dni]);
         return result;
     }
 }

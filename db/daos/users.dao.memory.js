@@ -10,13 +10,13 @@ export default class UsersDaoMemory{
 getAllUsers(){
     return this.users
 }
-getUserById(id){
-    const result = this.users.find(user => user.id === parseInt(id))
+getUserById(dni){
+    const result = this.users.find(user => user.id === parseInt(dni))
     return result
 }
 
-getUserByName(username){
-    const result = this.users.find(user => user.username === username)
+getUserByName(dni){
+    const result = this.users.find(user => user.dni === dni)
     return result
 }
 
@@ -41,10 +41,10 @@ updateUser(data) {
 }
 
 
-deleteUser(id) {
+deleteUser(dni) {
     let oldLength = this.users.length
     this.users = this.users.filter(user =>
-        user.id !== parseInt(id))
+        user.id !== parseInt(dni))
         return oldLength !== this.users.length
 }
 

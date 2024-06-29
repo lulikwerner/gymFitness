@@ -18,7 +18,12 @@
 }
 
   
-
+.register{
+    padding-top: 5rem;
+}
+.login{
+    padding-top:5rem;
+}
 body{
     max-width: 100vw;
     background-color: #d0d0d0;
@@ -96,6 +101,7 @@ header{
 /* Estilos main */
 .main{
     width: 100%;
+    padding-top: 10vh;
 }
 
 /* Estilos de Home */
@@ -107,7 +113,7 @@ header{
     justify-content: center;
     align-items: center;
     background-color: black;
-    background-image: url(img/fondos/4.jpg);
+    background-image: url(../img/fondos/4.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -182,7 +188,7 @@ header{
 .imgGym{
     width: 40%;
     height: 100%;
-    background-image: url(img/fondos/foto-gym.jpg);
+    background-image: url(../img/fondos/foto-gym.jpg);
     background-size: cover;
     border-radius: .9em;
     /* margin-right: 55px; */
@@ -666,4 +672,3 @@ footer{
         height: 32%;
     }
 }
-

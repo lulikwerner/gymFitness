@@ -132,21 +132,42 @@ sections.forEach(section => {
     }).observe(section);
 });
 
+
+
 navLinks.forEach(link => {
     link.addEventListener('click', (event) => {
-        event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+        // Evita el comportamiento predeterminado del enlace
+        event.preventDefault();
 
-        const targetSection = document.getElementById(link.getAttribute('href').slice(1));
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+        // Obtiene el href del enlace
+        const href = link.getAttribute('href');
 
-        navLinks.forEach(otherLink => {
-            if (otherLink !== link) { // Compara el elemento a con el elemento a clickeado
-                otherLink.classList.remove('active');
+        // Verifica si el enlace apunta a otra página
+        if (href.startsWith('./') || href.startsWith('../') || href.startsWith('/')) {
+            // Redirige a la nueva ubicación
+            window.location.href = href;
+        } else {
+            // Obtiene el elemento destino por su ID (solo si es un enlace interno)
+            const targetSection = document.getElementById(href.slice(1));
+
+            if (targetSection) {
+                // Realiza el desplazamiento suave al elemento encontrado
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+
+                // Remueve la clase 'active' de todos los enlaces y la agrega al enlace clickeado
+                navLinks.forEach(otherLink => {
+                    if (otherLink !== link) {
+                        otherLink.classList.remove('active');
+                    }
+                });
+                link.classList.add('active');
+            } else {
+                console.error('Elemento no encontrado para el ID:', href.slice(1));
             }
-        });
-
-        link.classList.add('active');
+        }
     });
+
+
 
     link.addEventListener('mouseover', () => {
         navLinks.forEach(otherLink => {

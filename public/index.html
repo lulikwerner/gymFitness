@@ -1,25 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" sizes="32x32"  href="./assets/img/favicons/favicon-16x16.png">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="./assets/styles/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/47e07fc3d8.js" crossorigin="anonymous"></script>
+
+        <title>Fitness Elite Gym</title>
+    </head>
 <body>
-    Registrar
-    <form action="./api/sessions/register" method="POST">
-        <input name="username" type="text">
-        <input name="age" type=number">
-        <input name="email" type=email">
-        <input name="password" type="password">
-        <button>Registrarse</button>
-    </form>
-    Login
-    <form action="./api/sessions/login" method="POST">
-        <input name="username" type="text">
-        <input name="password" type="password">
-        <button>Iniciar Sesion</button>
-    </form>
-    
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <li class="logo"><a href="#home"><img src="./assets/img/logos/logo2.jpg" alt="logo"></a></li>
+                <li><label class="open-menu"><i class="fas fa-bars"></i></label></li>
+                <li class="menu">
+                    <a href="#home" class="navItem active">INICIO</a>
+                    <a href="#aboutUs" class="navItem">SOBRE NOSOTROS</a>
+                    <a href="#pricing" class="navItem">PRECIOS</a>
+                    <a href="#galery" class="navItem">GALERÍA DE FOTOS</a>
+                    <a href="#contact" class="navItem">CONTACTO</a>
+                    <a href="./register.html" class="navItem">REGISTRARSE</a>
+                    <a href="./login.html" class="navItem">INICIAR SESIÓN</a>
+                    
+                </li>
+                <li><label class="close-menu"><i class="fas fa-times"></i></label></li>
+            </ul>
+            
+        </nav>
+    </header>
+    <main class="main">
+        <section id="home" class="seccion">
+            <div class="titleSlogan">
+                <h1 class="title">Fitness Elite Gym</h1>
+                <div class="slogans">
+                    <p class="slogan">
+                        Supera tus límites, alcanza tus metas.
+                    </p>
+                    <p class="slogan">
+                        Tu transformación comienza aqui.
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="imgBanner">
+                <img src="img/fondos/4.jpg" alt="banner">
+            </div> -->
+        </section>
+        <section id="aboutUs" class="seccion">
+            <h1>Sobre Nosotros</h1>
+            <div class="imgTextContainer">
+                <div class="imgGym">
+                    <!-- <img src="img/logos/logo2.jpg" alt="logo"> -->
+                </div>
+                <div class="aboutUsText">
+                    <img src="./assets/img/logos/logo2.jpg" alt="logo">
+                    <p>
+                        Nuestro gimnasio cuenta con entrenadores certificados que le brindaran las directrices para poder establecer un plan de entrenamiento y asi usted pueda lograr las metas a traves del ejercicio continuo y las directrices de nuestros entrenadores.
+                        <!-- Ven a nuestro gimnasio, te invitamos a que seas parte de la moda Fitness la cual es una actividad física realizada de forma repetida (varias veces por semana) que tiene el objetivo de que nos sintamos mejor, tanto física como psicológicamente. -->
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="pricing" class="seccion">
+            <div class="membershipPlansContainer pricingContainers">
+                <h2>Plan de membresias</h2>
+                <div class="memberships cards basic">
+                    <div class="membership card">
+                        <p class="monthFree">1 mes gratis</p>
+                        <h3 class="typeOfMembership">Plan Básico</h3>
+                        <ul class="listOfBenefits">
+                            <li>Acceso a instalaciones y equipos del gimnasio</li>
+                            <li>Acceso limitado a clases de zumba y yoga</li>
+                            <li>Musculosa de regalo</li>
+                            <li>Uso de casilleros compartidos</li>
+                        </ul>
+                        <div class="priceButton">
+                            <p class="price">
+                                20.000
+                                <span>/mes</span>
+                            </p>
+                            <button class="buyButton">Comprar</button>
+                        </div>
+                    </div>
+                    <div class="membership card gold">
+                        <p class="monthFree">1 mes gratis</p>
+                        <h3 class="typeOfMembership">Plan Gold</h3>
+                        <ul class="listOfBenefits">
+                            <li>Todos los beneficios del Básico</li>
+                            <li>Acceso ilimitado a todas las clases grupales</li>
+                            <li>1 sesión de entrenamiento personal gratuita por mes</li>
+                            <li>Uso de casilleros privados.</li>
+                        </ul>
+                        <div class="priceButton">
+                            <p class="price">
+                                50.000
+                                <span>/mes</span>
+                            </p>
+                            <button class="buyButton">Comprar</button>
+                        </div>
+                    </div>
+                    <div class="membership card platinum">
+                        <p class="monthFree">1 mes gratis</p>
+                        <h3 class="typeOfMembership">Plan Platinum</h3>
+                        <ul class="listOfBenefits">
+                            <li>Todos los beneficios del Gold +</li>
+                            <li>Toalla y agua embotellada de cortesía</li>
+                            <li>Descuentos en merch del gimnasio</li>
+                            <li>Asesoría nutricional gratuita 1 vez al mes</li>
+                        </ul>
+                        <div class="priceButton">
+                            <p class="price">
+                                80.000
+                                <span>/mes</span>
+                            </p>
+                            <button class="buyButton">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="personalTrainersContainer pricingContainers">
+                <h2>Personal trainers</h2>
+                <div class="personalTrainers cards">
+                    <div class="personalTrainer card">
+                        <div class="divImgPersonalTrainer gym">
+                            <img src="./assets/img/PT/gym.jpg" alt="gym" class="imgPersonalTrainer">
+                        </div>
+                        <div class="descPriceContainer">
+                            <div class="nameSpecialty">
+                                <h3 class="namePersonalTrainer">Tomas Mazza</h3>
+                                <p class="specialtyPersonalTrainer">Gimnasio y nutrición</p>
+                            </div>
+                            <p class="descriptionPersonalTrainer">
+                                Experiencia en entrenamiento de fuerza, acondicionamiento general y nutrición.
+                            </p>
+                            <div class="priceButton">
+                                <p class="price">
+                                    12.000
+                                    <span>/mes</span>
+                                </p>
+                                <button class="buyButton">Contratar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personalTrainer card">
+                        <div class="divImgPersonalTrainer">
+                            <img src="./assets/img/PT/box.jpg" alt="box" class="imgPersonalTrainer">
+                        </div>
+                        <div class="descPriceContainer">
+                            <div class="nameSpecialty">
+                                <h3 class="namePersonalTrainer">Carlos García</h3>
+                                <p class="specialtyPersonalTrainer">Boxeo y KickBoxing</p>
+                            </div>
+                            <p class="descriptionPersonalTrainer">
+                                Experiencia en boxeo y kickboxing, entrenamiento de técnica y resistencia.
+                            </p>
+                            <div class="priceButton">
+                                <p class="price">
+                                    14.000
+                                    <span>/mes</span>
+                                </p>
+                                <button class="buyButton">Contratar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personalTrainer card">
+                        <div class="divImgPersonalTrainer yoga">
+                            <img src="./assets/img/PT/yoga.jpg" alt="yoga" class="imgPersonalTrainer">
+                        </div>
+                        <div class="descPriceContainer">
+                            <div class="nameSpecialty">
+                                <h3 class="namePersonalTrainer">Sofía Pérez</h3>
+                                <p class="specialtyPersonalTrainer">Yoga</p>
+                            </div>
+                            <p class="descriptionPersonalTrainer">
+                                Instructora certificada con experiencia en diferentes estilos.
+                            </p>
+                            <div class="priceButton">
+                                <p class="price">
+                                    9.000
+                                    <span>/mes</span>
+                                </p>
+                                <button class="buyButton">Contratar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="galery" class="seccion">
+            <h2 class="galeryTitle">
+                Galería de Fotos
+            </h2>
+            <div class="galeryContainer">
+                <img src="./assets/img/galeria/foto1.jpg" alt="Imagen 1">
+                <img src="./assets/img/galeria/foto2.jpg" alt="Imagen 2">
+                <img src="./assets/img/galeria/foto3.jpg" alt="Imagen 3">
+                <img src="./assets/img/galeria/foto4.jpg" alt="Imagen 4">
+                <img src="./assets/img/galeria/foto5.jpg" alt="Imagen 5">
+                <img src="./assets/img/galeria/foto6.jpg" alt="Imagen 6">
+                <img src="./assets/img/galeria/foto7.jpg" alt="Imagen 7">
+                <img src="./assets/img/galeria/foto8.jpg" alt="Imagen 8">
+                <img src="./assets/img/galeria/foto9.jpg" alt="Imagen 9">
+                <img src="./assets/img/galeria/foto10.jpg" alt="Imagen 10">
+                <img src="./assets/img/galeria/foto11.jpg" alt="Imagen 11">
+                <img src="./assets/img/galeria/foto12.jpeg" alt="Imagen 12">
+            </div>
+        </section>
+        <section id="contact" class="seccion">
+            <div class="contactContainer">
+                <h2>¡Contáctanos!</h2>
+                <form id="contactForm" onsubmit="return validateForm()">
+                    <div class="importantContact">
+                        <div class="form-group">
+                            <label for="nombre">Nombre y apellido:</label>
+                            <input type="text" id="nombre" name="nombre" autocomplete="on">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" autocomplete="on">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" autocomplete="on">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje" autocomplete="on"></textarea>
+                        </div>
+                    </div>
+                    <div class="miscContact">
+                        <div class="form-group">
+                            <label for="sede">Seleccionar sede:</label>
+                            <select id="sede" name="sede">
+                                <option value="">Sede</option>
+                                <option value="Olivos">Olivos</option>
+                                <option value="La Lucila">La Lucila</option>
+                                <option value="Martinez">Martínez</option>
+                                <option value="San Isidro">San Isidro</option>
+                                <option value="Tigre">Tigre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>¿Cómo nos conociste?</legend>
+                                <div id="radio" class="radio-group">
+                                    <input type="radio" id="internet" name="conociste" value="Internet">
+                                    <label for="internet">Internet</label>
+                                    <input type="radio" id="amigo" name="conociste" value="Amigo">
+                                    <label for="amigo">Amigo</label>
+                                    <input type="radio" id="publicidad" name="conociste" value="Publicidad">
+                                    <label for="publicidad">Publicidad</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">Adjuntar fotografía:</label>
+                            <input type="file" id="imagen" name="imagen" accept="image/*">
+                        </div>
+                    </div>
+                    <button type="submit" class="submitButton">Enviar</button>
+                </form>
+            </div>
+        </section>
+       
+    </main>
+    <footer>
+        <div class="foot">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    <!--boostrap?-->
+    </footer>
+    <script src="./js/main.js"></script>
 </body>
 </html>

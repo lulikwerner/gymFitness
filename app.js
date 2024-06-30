@@ -1,6 +1,7 @@
 import express from 'express'
 import Server from './server/Server.js'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 // import { authRoutes } from './auth/index.js';
 //import session from "express-session"
 import passport from './config/passport.js'
@@ -20,7 +21,7 @@ app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(passport.initialize());
-
+app.use(cookieParser());
 // Crear las instancias de las rutas
 const sessionRouter = new SessionRouter();
 const userRouter = new UserRouter();

@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 2px;
+    box-sizing: border-box;
+    font-family: "Assistant", sans-serif;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: #adadad;
+    /* background-size: cover;
+    background-position: center; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+    width: 100%;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(151, 151, 151);
+}
+
+main{
+    height: 75%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button{
+    cursor: pointer;
+}
+
+.nav-bar{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 55%;
+}
+
+.nav-bar .menu a {
+    color: black;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    color: black; 
+    margin-right: 20px; 
+    transition: color 0.3s;
+}
+
+.nav-bar .menu:hover > a {
+    color: white;
+}
+
+.logo {
+    margin-right: auto;
+    margin-left: 2%;
+}
+
+.logo a img{
+    height: 68px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.buttonsLogInUp{
+    display: flex;
+    width: 30%;
+    margin-right: 2em;
+    justify-content: flex-end;
+}
+
+.logOut, #updateButton{
+    background-color: transparent;
+    padding: .6em;
+    border-radius:.6em;
+    font-weight: 700;
+    border: 1px solid black;
+    transition: background-color .5s ease;
+}
+
+.logOut:hover, #updateButton:hover{
+    background-color: black;
+}
+
+.logOut:hover, #updateButton:hover{
+    color: white;
+}
+
+.logOut, #updateButton{
+    color: black;
+    transition: color .5s ease;
+}
+
+#userProfile{
+    width: 100%;
+    height: 85%;
+}
+
+.userProfileContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.profileData{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 45%;
+    height: 80%;
+}
+
+.profileImg{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 45%;
+}
+
+.profileImg img{
+    width: 100%;
+    height: 100%;
+}
+
+.profileText{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+form{
+    width: 45%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 1em;
+    background-color: #9d9d9d;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+}
+
+legend{
+    text-align: center;
+}
+
+.form-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+}
+
+footer{
+    height: 9vh;
+    width: 100%;
+}
+
+.foot {
+    width: 100%;
+    background-color: rgb(151, 151, 151);
+    color: black; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.foot i {
+    font-size: 24px; 
+    margin-right: 20px; 
+}
+
+.foot i:hover {
+    color: white;
+    cursor: pointer; 
+}

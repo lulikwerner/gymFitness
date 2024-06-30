@@ -26,13 +26,16 @@
                     <a href="#pricing" class="navItem">PRECIOS</a>
                     <a href="#galery" class="navItem">GALERÍA DE FOTOS</a>
                     <a href="#contact" class="navItem">CONTACTO</a>
-                    <a href="./register.html" class="navItem">REGISTRARSE</a>
-                    <a href="./login.html" class="navItem">INICIAR SESIÓN</a>
-                    
+                    <!-- <a href="./profile.html?token=${token}" class="navItem" id="profileLink" style="display: none;">PERFIL</a> -->
                 </li>
                 <li><label class="close-menu"><i class="fas fa-times"></i></label></li>
             </ul>
-            
+            <div class="buttonsLogInUp">
+                <button onclick="goProfile()" class="navItem" id="profileLink" style="display: none;">Perfil</button>
+                <button class="loginButton"><a href="./login.html" class="navItem">INICIAR SESIÓN</a></button>
+                <button class="registerButton"><a href="./register.html" class="navItem">REGISTRARSE</a></button>
+                <button class="logoutButton" style="display: none;"><a href="./login.html" class="navItem">CERRAR SESIÓN</a></button>
+            </div>
         </nav>
     </header>
     <main class="main">

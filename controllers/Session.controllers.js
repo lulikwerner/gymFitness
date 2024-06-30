@@ -143,7 +143,23 @@ export default class SessionControllers {
         res.clearCookie('token');
         
         // Redirigir a la página principal
-        res.redirect(`/index.html`);
+        res.redirect(`/login.html`);
     };
-    
+
+
+    checkToken = (req, res) => {
+        const token = req.cookies.token;
+
+        if (!token) {
+            return res.status(401).json({ tokenValid: false });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRETKEY, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ tokenValid: false });
+            }
+
+            res.json({ tokenValid: true });
+        });
+    }
 }

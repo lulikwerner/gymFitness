@@ -180,7 +180,6 @@ navLinks.forEach(link => {
     link.addEventListener('mouseleave', () => {
         if (currentSection) {
             const linkActive = document.querySelector(`[href="#${currentSection.id}"]`);
-            console.log(currentSection.id);
             if (linkActive) {
                 linkActive.classList.add('active');
             }

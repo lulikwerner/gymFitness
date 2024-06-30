@@ -20,34 +20,41 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar la información del usuario en el HTML
         const userProfileDiv = document.getElementById('userProfile');
         //Le saco el public de la ruta imagen
-        const imageUrl = user.imagen.replace('public/', '');
+        const imageUrl = user.imagen.replace('public', '..').replace(`\ `,"/");
+        // const imageUrl = `../assets/img/users/persona.webp`;
         userProfileDiv.innerHTML = `
-            <div>
-                <img src="${imageUrl}" alt="Imagen de perfil">
-                <p><strong>Nombre:</strong> ${user.name}</p>
-                <p><strong>Apellido:</strong> ${user.lastname}</p>
-                <p><strong>Email:</strong> ${user.email}</p>
-                <p><strong>Edad:</strong> ${user.age}</p>
-                <p><strong>Plan:</strong> ${user.fk_idplan}</p>
-            </div>
-            <form id="updateForm" action="/api/users/${user.iduser}" method="POST">
-                <fieldset>
-                    <legend>¿Quieres cambiar tu plan?</legend>
-                    <div id="radio" class="radio-group">
-                        <input type="radio" id="basic" name="plan" value="1" checked>
-                        <label for="basic">Básico</label>
-                        <input type="radio" id="gold" name="plan" value="2">
-                        <label for="gold">Gold</label>
-                        <input type="radio" id="platinum" name="plan" value="3">
-                        <label for="platinum">Platinum</label>
+            <div class="userProfileContainer">
+                <div class="profileData">
+                    <div class="profileImg">
+                        <img src="${imageUrl}" alt="Imagen de perfil">
                     </div>
-                </fieldset>
-                <div class="form-img">
-                    <label for="imagen">Adjuntar fotografía:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/*">
+                    <div class="profileText">
+                        <p><strong>Nombre:</strong> ${user.name}</p>
+                        <p><strong>Apellido:</strong> ${user.lastname}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Edad:</strong> ${user.age}</p>
+                        <p><strong>Plan:</strong> ${user.fk_idplan}</p>
+                    </div>
                 </div>
-                <button id="updateButton" type="button">Actualizar datos</button> <!-- Cambiado a type="button" -->
-            </form>
+                <form id="updateForm" action="/api/users/${user.iduser}" method="POST">
+                    <fieldset>
+                        <legend>¿Quieres cambiar tu plan?</legend>
+                        <div id="radio" class="radio-group">
+                            <input type="radio" id="basic" name="plan" value="1" checked>
+                            <label for="basic">Básico</label>
+                            <input type="radio" id="gold" name="plan" value="2">
+                            <label for="gold">Gold</label>
+                            <input type="radio" id="platinum" name="plan" value="3">
+                            <label for="platinum">Platinum</label>
+                        </div>
+                    </fieldset>
+                    <div class="form-img">
+                        <label for="imagen">Adjuntar fotografía:</label>
+                        <input type="file" id="imagen" name="imagen" accept="image/*">
+                    </div>
+                    <button id="updateButton" type="button">Actualizar datos</button> <!-- Cambiado a type="button" -->
+                </form>
+            </div>
         `;
 
         // Escuchar el evento click del botón de actualización

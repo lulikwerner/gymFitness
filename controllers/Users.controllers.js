@@ -109,7 +109,6 @@ export default class UsersControllers {
     addUser = async (req, res) => {
         const user = this.userHelpers.parseUser(req.body)
         const result = await this.db.addUser(user)
-        console.log('elreu', result)
         res.json(result)
     }
 

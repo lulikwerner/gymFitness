@@ -1,0 +1,222 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 2px;
+    box-sizing: border-box;
+    font-family: "Assistant", sans-serif;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}
+
+body{
+    height: 120vh;
+    width: 100vw;
+    background-image: url(../img/fondos/4.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+    width: 100%;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(151, 151, 151);
+}
+
+main{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 55%;
+}
+
+.nav-bar .menu a {
+    color: black;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    color: black; 
+    margin-right: 20px; 
+    transition: color 0.3s;
+}
+
+.nav-bar .menu:hover > a {
+    color: white;
+}
+
+.logo {
+    margin-right: auto;
+    margin-left: 2%;
+}
+
+.logo a img{
+    height: 68px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.buttonsLogInUp{
+    display: flex;
+    width: 30%;
+    margin-right: 2em;
+    justify-content: flex-end;
+}
+
+.loginButton{
+    background-color: transparent;
+    padding: .6em;
+    border-radius:.6em;
+    font-weight: 700;
+    border: 1px solid black;
+    transition: background-color .5s ease;
+    cursor: pointer;
+}
+
+.loginButton:hover{
+    background-color: black;
+}
+
+.loginButton:hover > a{
+    color: white;
+}
+
+.loginButton a{
+    color: black;
+    transition: color .5s ease;
+}
+
+.register{
+    background-color: rgb(151, 151, 151, 0.5);
+    padding: 10px;
+    /* border: 1px solid #d0d0d0; */
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1.5em;
+}
+
+legend{
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 2px 2px 5px #000000
+}
+
+.label{
+    width: 60%;
+    /* margin: 90px auto; */
+    display: grid;
+    grid-template-areas: "input";
+}
+
+.input{
+    grid-area: input;
+    width: 100%;
+    font: inherit;
+    border-radius: .6em;
+    border: 1px solid black;
+    padding: .7rem 1.5rem;
+    background-color: #d0d0d0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  /* Ocultar las flechas en navegadores basados en Webkit (Chrome, Safari) */
+  display: none;
+}
+
+.labelName{
+    grid-area: input;
+    z-index: 100;
+    width: max-content;
+    margin-left: 1rem;
+    padding: 0 .5rem;
+    align-self: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: transform .2s;
+    transform-origin: center left;
+    border-radius: .6em;
+}
+
+.input:where(:focus,
+:not(:placeholder-shown)) + .labelName{
+    transform: translateY(-50%) scale(.7);
+    background-color: #d0d0d0;
+}
+
+.signUp{
+    font-size: 1em;
+    border: 1px solid black;
+    color: black;
+    border-radius: .6em;
+    cursor: pointer;
+    transition: border .5s ease, color .5s ease, background-color .5s ease;
+    background-color: #d0d0d0;
+    padding: .7em;
+}
+
+.signUp:hover{
+    background-color: black;
+    color: white;
+}
+
+footer{
+    height: 9vh;
+    width: 100%;
+}
+
+.foot {
+    width: 100%;
+    background-color: rgb(151, 151, 151);
+    color: black; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.foot i {
+    font-size: 24px; 
+    margin-right: 20px; 
+}
+
+.foot i:hover {
+    color: white;
+    cursor: pointer; 
+}

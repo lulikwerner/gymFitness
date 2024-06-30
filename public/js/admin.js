@@ -18,19 +18,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         const userProfileDiv = document.getElementById('userdisplay');
 
         data.users.forEach(user => {
-            const userDiv = document.createElement('div');
-            userDiv.classList.add('card');
-            userDiv.innerHTML = `
-                <p><strong>Nombre:</strong> ${user.name}</p>
-                <p><strong>Apellido:</strong> ${user.lastname}</p>
-                <p><strong>Email:</strong> ${user.email}</p>
-                <p><strong>Edad:</strong> ${user.age}</p>
-                <p><strong>Plan:</strong> ${user.fk_idplan}</p>
-                <button class="btn-delete" data-user-id="${user.iduser}">Borrar</button>
+            // const userDiv = document.createElement('div');
+            // userDiv.classList.add('card');
+            userProfileDiv.innerHTML += `
+                <tr class="card">
+                    <td>${user.iduser}</td>
+                    <td>${user.name}</td>
+                    <td>${user.lastname}</td>
+                    <td>${user.email}</td>
+                    <td>${user.age}</td>
+                    <td>${user.fk_idplan}</td>
+                    <td><button class="btn-delete" data-user-id="${user.iduser}">Borrar</button></td>
+                </tr>
             `;
-            userProfileDiv.appendChild(userDiv);
+            // userProfileDiv.append(userDiv);
 
             // Agregar evento de click al botón "Borrar"
+            const userDiv = document.querySelector(".card");
             const btnDelete = userDiv.querySelector('.btn-delete');
             btnDelete.addEventListener('click', async () => {
                 const userId = btnDelete.getAttribute('data-user-id');

@@ -1,44 +1,31 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Obtener token desde URL o cookie
-    const urlParams = new URLSearchParams(window.location.search);
-    const tokenFromUrl = urlParams.get('token'); // Obtener token desde parámetro URL
-    const tokenFromCookie = getCookie('token'); // Obtener token desde cookie
+    try {
+        const response = await fetch('/api/sessions/check-token');
+        const data = await response.json();
 
-    const token = tokenFromUrl || tokenFromCookie; // Priorizar token de URL, luego de cookie
+        if (data.tokenValid) {
+            // Ocultar opciones de inicio de sesión y registro
+            document.querySelector('.registerButton').style.display = 'none';
+            document.querySelector('.loginButton').style.display = 'none';
 
-    console.log('Token encontrado:', token);
-
-    // Función para obtener el valor de una cookie por su nombre
-    console.log(tokenFromUrl)
-    function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (let cookie of cookies) {
-            const cookiePair = cookie.split('=');
-            const cookieName = cookiePair[0].trim();
-            if (cookieName === name) {
-                return cookiePair[1];
-            }
+            // Mostrar opción de perfil
+            document.getElementById('profileLink').style.display = 'block';
+            document.querySelector('.logoutButton').style.display = 'block';
+        } else {
+            // Mostrar opciones de inicio de sesión y registro
+            document.querySelector('.registerButton').style.display = 'block';
+            document.querySelector('.loginButton').style.display = 'block';
+            // Ocultar opción de perfil
+            document.getElementById('profileLink').style.display = 'none';
+            document.querySelector('.logoutButton').style.display = 'none';
         }
-        return null;
+    } catch (error) {
+        console.error('Error verificando el token:', error);
     }
-
-    // Función para verificar el token y ocultar enlaces de registro e inicio de sesión si está presente
-    function checkTokenAndHideLinks() {
-        // Realiza lógica para ocultar enlaces de registro e inicio de sesión si el token está presente
-        if (token) {
-            const registerLink = document.querySelector('.navItem[href="./register.html"]');
-            const loginLink = document.querySelector('.navItem[href="./login.html"]');
-            
-            if (registerLink) {
-                registerLink.style.display = 'none';
-            }
-            
-            if (loginLink) {
-                loginLink.style.display = 'none';
-            }
-        }
-    }
-
-    // Llamar a la función para verificar el token y ocultar enlaces si es necesario
-    checkTokenAndHideLinks();
+    
 });
+
+// Función para ir al pefil
+function goProfile() {
+    window.history.go(-1);
+}

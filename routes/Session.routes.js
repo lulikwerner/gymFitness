@@ -12,26 +12,11 @@ export default class SessionRoutes extends Routes {
     }
 
     getRouter() {
-        console.log('Initializing routes');
-        this.router.post('/register', this.controller.register);
-        this.router.post('/login', this.controller.login);
-        this.router.post('/logout', this.controller.logout);
+        this.router
+        .get('/check-token', this.controller.checkToken)
+        .post('/register', this.controller.register)
+        .post('/login', this.controller.login)
+        .post('/logout', this.controller.logout)
         return this.router;
+    }
 }
-}
-
-
-  
-      /*this.get('/githubcallback', ['NO_AUTH'], passportCall('github', { strategyType: 'locals' }), usersController.loginGitHubCallback);
-  
-      this.get('/github', ['NO_AUTH'], passportCall('github', { strategyType: 'locals' }), usersController.loginGithub);
-  
-      this.get('/current', ['PRIVATE'], passportCall('jwt', { strategyType: "locals" }), usersController.current);
-  
-      this.post('/restoreRequest',['NO_AUTH'], passportCall('jwt', { strategyType: "jwt" }), usersController.restoreRequest);
-  
-      this.post('/restorePassword', ['PUBLIC'], passportCall('jwt', { strategyType: "jwt" }), usersController.restorePassword);*/
-  
-    
-  
-

@@ -17,8 +17,8 @@ const server = new Server();
 //console.log(process.argv)
 
 app.use(express.static('public'))
-app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(passport.initialize());
 
 // Crear las instancias de las rutas

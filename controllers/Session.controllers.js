@@ -50,6 +50,7 @@ export default class SessionControllers {
             }
             //Busco si el usuario existe en mi db
             const userExist = await this.db.getUserByEmail(email);
+            console.log(userExist)
             if(!userExist){
             const hash = bcrypt.hashSync(password, 10); // Asegúrate de especificar el número de saltos
     
@@ -136,12 +137,13 @@ export default class SessionControllers {
     
 
 
-    //FALTA HACER LA PARTE CON SESSION
+
     logout = (req, res) => {
-        res.cookie('jwt', '', { expires: new Date(0), httpOnly: true });
-        console.log('cerrando')
- // Limpio la cookie JWT
-   res.clearCookie('jwt-token');
-   res.redirect(`/index.html`);
+        // Limpiar la cookie 'token'
+        res.clearCookie('token');
+        
+        // Redirigir a la página principal
+        res.redirect(`/index.html`);
     };
+    
 }

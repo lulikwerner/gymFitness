@@ -7,14 +7,13 @@ const config ={
    // port: 3307,//3306
     database: process.env.DB_SQL
 }
-
-
-export default config
-
-/*const config ={
+/*onst config ={
     host: 'localhost',//ruta del servidor cuando lo suba
     user: 'root',
     password: '',
     port: 3307,//3306
     database: 'FitnessGym'
 }*/
+
+export default config
+

@@ -1,3 +1,5 @@
+import multer from 'multer'
+import upload from '../config/multer.js'
 import { decodeToken } from '../config/jwtUtils.js';
 import User from '../models/Users.js'
 import UsersDaoMemory from '../db/daos/users.dao.memory.js'
@@ -15,6 +17,10 @@ export default class UsersControllers {
 
         this.userHelpers = new UsersHelpers()
     }
+//Middleware multer
+    updateUserWithImage = multer({ storage: upload }).single('imagen');
+
+
     /**
      * 
      * @param {Request} req 
@@ -108,10 +114,37 @@ export default class UsersControllers {
     }
 
     updateUser = async (req, res) => {
-        const user = this.userHelpers.parseUser(req.body);
-        const result = await this.db.updateUser(user);
-        res.json(result); // Devuelve el usuario modificado como respuesta
-    }
+        const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
+        const { plan } = req.body; // Datos actualizados del usuario: solo plan
+        const imagenPath = req.file ? req.file.path : null; // Obtener la ruta de la imagen si se cargó
+    
+        // Crear objeto con los datos a actualizar
+        const userData = {};
+        
+        // Actualizar userData con el plan si se proporcionó
+        if (plan) {
+            userData.plan = plan;
+        }
+    
+        // Actualizar userData con la ruta de la imagen si se proporcionó
+        if (imagenPath) {
+            userData.imagen = imagenPath;
+        }
+    
+        try {
+            const result = await this.db.updateUser(userId, userData);
+    
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: 'Usuario no encontrado' });
+            }
+    
+            res.json({ message: 'Usuario actualizado con éxito' });
+        } catch (error) {
+            console.error('Error al actualizar el usuario:', error);
+            res.status(500).json({ error: 'Error al actualizar el usuario' });
+        }
+    };
+    
 
 
 

@@ -39,7 +39,7 @@ export default class UsersDaoMysql extends MySql {
                 return null;
             }
         } catch (error) {
-            console.error('Error fetching user by DNI:', error);
+            console.error('Error fetching user by email:', error);
             throw error;
         }
     }
@@ -59,13 +59,50 @@ export default class UsersDaoMysql extends MySql {
             throw error;
         }
     }
-
-    async updateUser(data) {
-        const { dni, name, lastname, email, age } = data;
-        const query = `UPDATE ${this.table} SET name = ?,lastname = ?, email = ?, age = ? WHERE dni = ?`;
-        const [result] = await this.connection.promise().query(query, [name, lastname, email, age, dni]);
-        return result;
+   
+    async updateUser(userId, dataToUpdate) {
+        const { plan, imagen } = dataToUpdate;
+        console.log('imagen',imagen)
+        console.log('data a actualizar', dataToUpdate);
+    
+        const updateFields = [];
+        const queryParams = [];
+    
+        if (plan !== undefined) {
+            updateFields.push('fk_idplan = ?');
+            queryParams.push(plan);
+        }
+    
+        if (imagen !== undefined) {
+            if (imagen === '') {
+                updateFields.push('imagen = ?');
+                queryParams.push('assets/img/users/persona.jpg'); // Ruta de imagen por defecto si no se proporciona ninguna
+            } else {
+                updateFields.push('imagen = ?');
+                queryParams.push(imagen);
+            }
+        }
+    
+        queryParams.push(userId); // Agregar el userId al final de los parámetros
+    
+        const updateQuery = `UPDATE ${this.table} SET ${updateFields.join(', ')} WHERE iduser = ?`;
+    
+        try {
+            const [result] = await this.connection.promise().query(updateQuery, queryParams);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     async deleteUser(id) {
         const query = `DELETE FROM ${this.table} WHERE iduser = ?`;

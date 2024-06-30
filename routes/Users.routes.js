@@ -1,5 +1,6 @@
 import express from 'express';
 import Routes from "./Routes.js";
+import upload from "../config/multer.js"
 import UsersControllers from "../controllers/Users.controllers.js";
 
 export default class UserRoutes extends Routes {
@@ -16,7 +17,7 @@ export default class UserRoutes extends Routes {
             .get('/profile', this.controller.getProfile)
             .get('/:id', this.controller.getUsersById) 
             .post('/', this.controller.addUser)
-            .put('/', this.controller.updateUser)
+            .put('/:id',  upload.single('imagen'),this.controller.updateUser)
             .delete('/:id', this.controller.deleteUser);
         return this.router;
     }

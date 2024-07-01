@@ -141,9 +141,8 @@ export default class SessionControllers {
     logout = (req, res) => {
         // Limpiar la cookie 'token'
         res.clearCookie('token');
-        
         // Redirigir a la página principal
-        res.redirect(`/login.html`);
+        res.redirect(`/index.html`);
     };
 
 

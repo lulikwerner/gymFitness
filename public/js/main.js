@@ -136,7 +136,6 @@ sections.forEach(section => {
 
 navLinks.forEach(link => {
     link.addEventListener('click', (event) => {
-        // Evita el comportamiento predeterminado del enlace
         event.preventDefault();
 
         // Obtiene el href del enlace

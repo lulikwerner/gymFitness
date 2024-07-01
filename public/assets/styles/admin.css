@@ -119,6 +119,10 @@ button{
     transition: color .5s ease;
 }
 
+#searchForm{
+    width: 60%;
+}
+
 .label{
     width: 60%;
     /* margin: 90px auto; */

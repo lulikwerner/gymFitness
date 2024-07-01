@@ -50,9 +50,9 @@ export default class UsersDaoMysql extends MySql {
  */
     async addUser(user) {
         try {
-            const { dni, name, lastname, email, age, password } = user;
-            const query = `INSERT INTO ${this.table} (dni, name, lastname, email, age, password) VALUES (?, ?, ?,?, ?, ?)`;
-            const [result] = await this.connection.promise().query(query, [dni, name,lastname, email, age, password]);
+            const { dni, name, lastname, email, age, password, imagen } = user;
+            const query = `INSERT INTO ${this.table} (dni, name, lastname, email, age, password, imagen) VALUES (?, ?, ?,?, ?, ?, "public/assets/img/users/persona.webp")`;
+            const [result] = await this.connection.promise().query(query, [dni, name,lastname, email, age, password, imagen]);
             return result;
         } catch (error) {
             console.error('Error adding user:', error);

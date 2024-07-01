@@ -31,10 +31,13 @@
     </header>
     <main>
         <h1>Usuarios</h1>
-        <label for="buscar" class="label">
-            <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
+        <form action="/api/users/:${email}" method="GET" id="searchForm">
+            <input type="submit">
+            <label for="buscar" class="label">
+                <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
+            </label>
             <span class="labelName">Buscar</span>
-        </label>
+        </form>
         <div class="usersContainer">
             <table id="userdisplay">
                 <tr>

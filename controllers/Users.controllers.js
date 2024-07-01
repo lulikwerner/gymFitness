@@ -69,40 +69,21 @@ export default class UsersControllers {
         }
     }
 
-    getUsersById = async (req, res) => {
-        //Obtengo el token
-        const token = req.headers.authorization.split(' ')[1];
+    getUserByID = async(req, res) =>{
+        const { email } = req.params;
+        console.log(`Buscando al usuario con email: ${email}`);
 
-        // Decodificar el token para obtener el dni del usuario
-        const decodedToken = decodeToken(token);
+        try {
+           const user = await this.db.getUserByEmail(email);
 
-        if (decodedToken && decodedToken.dni) {
-
-            const userDni = decodedToken.dni;
-            console.log('ID del usuario desde el token:', userDni);
-            try {
-                const user = await User.findById(userDni);
-
-                if (!user) {
-                    return res.status(404).json({ error: 'Usuario no encontrado' });
-                }
-
-                // Aquí decides qué datos del usuario deseas devolver como perfil
-                const userProfile = {
-                    name: user.name,
-                    lastname: user.lastname,
-                    email: user.email,
-                    name: user.dni,
-                    age: user.age,
-                    // Agrega más campos según sea necesario
-                };
-
-                res.status(200).json({ message: 'Perfil de usuario obtenido correctamente', data: userProfile });
-
-            } catch (error) {
-                console.error('Error al obtener perfil de usuario:', error);
-                res.status(500).json({ error: 'Error interno del servidor' });
+            if (!user) {
+                return res.status(404).json({ error: 'Usuario no encontrado' });
             }
+
+            res.json(user); // Devuelve el usuario encontrado como JSON
+        } catch (error) {
+            console.error('Error al buscar usuario por ID:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 

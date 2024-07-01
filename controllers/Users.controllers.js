@@ -130,6 +130,7 @@ export default class UsersControllers {
 
     deleteUser = async (req, res) => {
         const { id } = req.params
+        console.log('borrando')
         console.log(id)
         const result = await this.db.deleteUser(id)
         res.json(result)

@@ -18,7 +18,7 @@ export default class UserRoutes extends Routes {
             .get('/:email', this.controller.getUserByID) 
             .post('/', this.controller.addUser)
             .put('/:id',  upload.single('imagen'),this.controller.updateUser)
-            .delete('/:id', this.controller.deleteUser);
+            .delete('/:id', this.controller.deleteUser)
         return this.router;
     }
 

@@ -1,11 +1,11 @@
 // Codigo Contact
 function validateForm() {
-    const nombre = document.getElementById('nombre').value.trim();
+    const nombre = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
-    const sede = document.getElementById('sede').value;
-    const conociste = document.querySelector('input[name="conociste"]:checked');
+    const telefono = document.getElementById('telephone').value.trim();
+    const mensaje = document.getElementById('message').value.trim();
+    const plan = document.getElementById('plan').value;
+    //const conociste = document.querySelector('input[name="conociste"]:checked');
     const inputFile = document.querySelector('input[type="file"]');
 
     if (nombre === "") {
@@ -33,15 +33,15 @@ function validateForm() {
         return false;
     }
 
-    if (sede === "") {
-        alert("Por favor, seleccione una sede.");
+    if (plan === "") {
+        alert("Por favor, seleccione un plan.");
         return false;
     }
 
-    if (conociste === null) {
+    /*if (conociste === null) {
         alert("Por favor, seleccione cómo nos conoció.");
         return false;
-    }
+    }*/
 
     inputFile.addEventListener('change', function(event) {
         if (event.target.files.length === 0) {

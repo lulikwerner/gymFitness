@@ -1,7 +1,7 @@
 import multer from 'multer'
 import upload from '../config/multer.js'
 import { decodeToken } from '../config/jwtUtils.js';
-import User from '../models/Users.js'
+//import User from '../models/Users.js'
 import UsersDaoMemory from '../db/daos/users.dao.memory.js'
 import UsersDaoMysql from '../db/daos/users.dao.mysql.js'
 import UsersHelpers from '../helpers/users.helpers.js'
@@ -71,8 +71,6 @@ export default class UsersControllers {
 
     getUserByID = async(req, res) =>{
         const { email } = req.params;
-        console.log(`Buscando al usuario con email: ${email}`);
-
         try {
            const user = await this.db.getUserByEmail(email);
 

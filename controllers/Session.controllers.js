@@ -28,7 +28,7 @@ export default class SessionControllers {
         console.log(req.body);
         try {
             const { dni, name, lastname, email, age, password, password2 } = req.body;
-    
+            console.log('ene el controller', req.body)
             // Validar que no haya campos vacíos
             if (!dni || !name || !lastname || !email || !age || !password || !password2) {
                 return res.status(400).json({ error: 'Todos los campos son obligatorios' });
@@ -50,14 +50,12 @@ export default class SessionControllers {
             }
             //Busco si el usuario existe en mi db
             const userExist = await this.db.getUserByEmail(email);
-            console.log(userExist)
             if(!userExist){
             const hash = bcrypt.hashSync(password, 10); // Asegúrate de especificar el número de saltos
     
             const result = await this.db.addUser({ dni, name, lastname, email, age, password: hash }); // Aquí pasas 'hash' como password
     
-            res.redirect('/login.html');
-            //res.status(200).json({ message: 'Usuario registrado correctamente', data: result });
+            res.status(200).json({ message: 'Usuario registrado correctamente', data: result });
         }else{
             res.status(400).json({ error: 'El email ya existe' });
             //aca hay que enviar el error y enviarlo a login

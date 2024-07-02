@@ -30,7 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000); 
         } catch (error) {
             console.error('Error:', error.message);
-            showAlert(error.message || 'Error al registrar usuario. Por favor completa todos los campos correctamente.');
+            if (error.message === 'El email ya existe') {
+                showAlert('El email ya existe');
+                // Redirigir al login si el email ya existe
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 1200); 
+            } else {
+                showAlert('Error al registrar usuario. Por favor completa todos los campos correctamente.');
+            }
         }
     });
 

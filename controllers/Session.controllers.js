@@ -57,8 +57,7 @@ export default class SessionControllers {
     
             res.status(200).json({ message: 'Usuario registrado correctamente', data: result });
         }else{
-            res.status(400).json({ error: 'El email ya existe' });
-            //aca hay que enviar el error y enviarlo a login
+            res.status(400).json({ error: 'El email ya existe' }); 
         }
         } catch (error) {
             console.error('Error al registrar usuario:', error);
@@ -76,14 +75,14 @@ export default class SessionControllers {
             if (email === process.env.ADMIN_EMAIL) {
                 // Validar la contraseña del administrador
                 const isAdminPasswordCorrect = (password === process.env.ADMIN_PW);
-    
+        
                 if (!isAdminPasswordCorrect) {
                     return res.status(401).json({ error: 'Usuario o Contraseña incorrecta' });
                 }
-    
+        
                 // Generar el token JWT para el administrador
                 const token = jwt.sign({ email: process.env.ADMIN_EMAIL, role: 'admin' }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
-    
+        
                 // Configura la cookie
                 res.cookie('token', token, {
                     httpOnly: true,
@@ -91,43 +90,42 @@ export default class SessionControllers {
                     sameSite: 'None',
                     maxAge: 3600000
                 });
-    
-                // Redirigir a la página del administrador
-                return res.redirect(`/admin.html?token=${token}`);
+        
+                return res.status(200).json({ message: 'Usuario admin logeado correctamene', token });
             }
-    
+        
             // Busca el usuario por correo electrónico en la base de datos
             const user = await this.db.getUserByEmail(email);
-    
+        
             if (!user) {
-                return res.redirect(`/register.html`);
-               // return res.status(404).json({ error: 'No existe el usuario' });
+                return res.status(404).json({ error: 'No existe el usuario' });
             }
-    
+        
             // Compara la contraseña ingresada con la contraseña almacenada hasheada
             const passwordMatch = bcrypt.compareSync(password, user.password);
-    
+        
             if (!passwordMatch) {
                 return res.status(401).json({ error: 'Usuario o Contraseña incorrecta' });
             }
-    
+        
             // Generar el token JWT para el usuario
-            const token = jwt.sign({ email: user.email, id: user.dni }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
-    
+            const tokenuser = jwt.sign({ email: user.email, id: user.dni }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
+        
             // Configura la cookie
-            res.cookie('token', token, {
+            res.cookie('token', tokenuser, {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
                 maxAge: 3600000
             });
-    
-            // Redirigir a la página del usuario
-            res.redirect(`/profile.html?token=${token}`);
+        
+            return res.status(200).json({ message: 'Usuario logeado correctamente', tokenuser });
         } catch (error) {
+            console.error('Error en el servidor:', error);
             return res.status(500).json({ error: 'Error en el servidor' });
         }
     };
+    
 
     
 

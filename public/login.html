@@ -33,7 +33,7 @@
         </nav>
     </header>
     <main class="login">
-    <form action="./api/sessions/login" method="POST" class="logInForm">
+        <form  class="logInForm" id="logInForm" method="POST" >
         <fieldset>
             <legend>Inicio de sesión</legend>
         </fieldset>
@@ -45,7 +45,7 @@
             <input id="password" name="password" type="password" autocomplete="on" placeholder=" " class="input"></input>
             <span class="labelName">Contraseña</span>
         </label>
-        <button class="signIn">Log In</button>
+        <button class="logInButton">Log In</button>
     </form>
     </main>
     <footer>
@@ -56,5 +56,6 @@
         </div>
     <!--boostrap?-->
     </footer>
+    <script src="./js/login.js"></script>
 </body>
 </html>

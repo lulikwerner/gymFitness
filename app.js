@@ -1,5 +1,4 @@
 import express from 'express'
-import Server from './server/Server.js'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 // import { authRoutes } from './auth/index.js';
@@ -13,10 +12,6 @@ dotenv.config();
 
 const app = express()
 const PORT = process.env.PORT || 8080;
-const server = new Server();
-//server.run(PORT);
-//console.log(process.env)
-//console.log(process.argv)
 
 app.use(express.static('public'))
 app.use(express.json())

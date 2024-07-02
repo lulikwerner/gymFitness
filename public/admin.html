@@ -31,16 +31,19 @@
     </header>
     <main>
         <h1>Usuarios</h1>
-        <form action="/api/users/:${email}" method="GET" id="searchForm">
-            <input type="submit">
-            <label for="buscar" class="label">
-                <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
-            </label>
-            <span class="labelName">Buscar</span>
-        </form>
+        <div class="formTabla">
+            <form action="/api/users/:${email}" method="GET" id="searchForm">
+                <label for="buscar" class="label">
+                    <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
+                    <span class="labelName">Buscar</span>
+                </label>
+                <input type="submit" value="Buscar" class="searchFormButton">
+            </form>
+            <button class="searchFormButton tabla">Volver a la tabla</button>
+        </div>
         <div class="usersContainer">
             <table id="userdisplay">
-                <tr>
+                <!-- <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -48,7 +51,7 @@
                     <th>Edad</th>
                     <th>Plan</th>
                     <th> </th>
-                </tr>
+                </tr> -->
               <!-- Aquí se mostrarán los datos del usuario que traemos desde-->
             </table>
         </div>

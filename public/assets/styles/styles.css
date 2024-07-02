@@ -59,21 +59,30 @@ nav{
     padding: .6em;
     border-radius:.6em;
     font-weight: 700;
+    cursor: pointer;
 }
 
-.registerButton{
+.registerButton, #logoutButton, .Perfil{
     border: 1px solid black;
-    transition: background-color .5s ease;
+    background-color: transparent;
+    transition: background-color .3s ease;
 }
 
-.registerButton:hover{
+.registerButton:hover, 
+.loginButton:hover, 
+#logoutButton:hover, .Perfil:hover{
     background-color: black;
+    
+}
+
+#logoutButton:hover > a, .loginButton:hover > a, .registerButton:hover > a{
     color: white;
 }
 
 .buttonsLogInUp button a{
     text-decoration: none;
     color: black;
+    transition: color .5s ease, background-color .3s ease;
 }
 
 .nav-bar {

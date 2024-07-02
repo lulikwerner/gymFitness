@@ -18,18 +18,40 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const data = await response.json();
         const userProfileDiv = document.getElementById('userdisplay');
-        userProfileDiv.innerHTML = ''; // Limpiar contenido anterior
+        userProfileDiv.innerHTML = `<tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Email</th>
+                                        <th>Edad</th>
+                                        <th>Plan</th>
+                                        <th> </th>
+                                    </tr`; // Limpiar contenido anterior
 
         data.users.forEach(user => {
             const userRow = document.createElement('tr');
             userRow.classList.add('card');
+            let td = "";
+            switch(user.fk_idplan){
+                case 1:
+                    td = "<td>Básico</td>";
+                    break;
+                case 2:
+                    td = "<td>Gold</td>";
+                    break;
+                case 3:
+                    td = "<td>Platinum</td>";
+                    break;
+                default:
+                    break;
+            }
             userRow.innerHTML = `
                 <td>${user.iduser}</td>
                 <td>${user.name}</td>
                 <td>${user.lastname}</td>
                 <td>${user.email}</td>
                 <td>${user.age}</td>
-                <td>${user.fk_idplan}</td>
+                ${td}
                 <td><button class="btn-delete" data-user-id="${user.iduser}">Borrar</button></td>
             `;
             userProfileDiv.appendChild(userRow);
@@ -72,8 +94,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const searchForm = document.querySelector('#searchForm');
 const searchResults = document.querySelector('.input');
-const usersContainer = document.querySelector('.usersContainer');
-let oldTable = usersContainer.innerHTML;
+const usersContainer = document.querySelector('#userdisplay');
+// let oldTable = usersContainer.innerHTML;
 
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -98,8 +120,21 @@ searchForm.addEventListener('submit', async (event) => {
             }
 
             const data = await response.json();
+            let td = "";
+            switch(data.fk_idplan){
+                case 1:
+                    td = "<td>Básico</td>";
+                    break;
+                case 2:
+                    td = "<td>Gold</td>";
+                    break;
+                case 3:
+                    td = "<td>Platinum</td>";
+                    break;
+                default:
+                    break;
+            }
             usersContainer.innerHTML = `
-                <table id="userdisplay">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
@@ -115,10 +150,9 @@ searchForm.addEventListener('submit', async (event) => {
                         <td>${data.lastname}</td>
                         <td>${data.email}</td>
                         <td>${data.age}</td>
-                        <td>${data.fk_idplan}</td>
+                        ${td}
                         <td><button class="btn-delete" data-user-id="${data.iduser}">Borrar</button></td>
                     </tr>
-                </table>
             `;
 
             // Agregar evento de click al botón "Borrar" para el usuario filtrado
@@ -156,4 +190,10 @@ searchForm.addEventListener('submit', async (event) => {
         usersContainer.innerHTML = oldTable;
         alert('Debes ingresar un email válido');
     }
+});
+
+const botonTabla = document.querySelector('.tabla');
+botonTabla.addEventListener('click', async () => {
+    searchResults.value = ""
+    location.reload();
 });

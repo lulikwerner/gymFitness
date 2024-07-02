@@ -100,7 +100,7 @@ button{
     justify-content: flex-end;
 }
 
-.logOut, .btn-delete{
+.logOut, .btn-delete, .searchFormButton{
     background-color: transparent;
     padding: .6em;
     border-radius:.6em;
@@ -109,22 +109,29 @@ button{
     transition: background-color .5s ease;
 }
 
-.logOut:hover, .btn-delete:hover{
+.logOut:hover, .btn-delete:hover, .searchFormButton:hover{
     color: white;
     background-color: black;
 }
 
-.logOut, .btn-delete{
+.logOut, .btn-delete, .searchFormButton{
     color: black;
-    transition: color .5s ease;
+    transition: color .2s ease;
 }
 
 #searchForm{
-    width: 60%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.searchFormButton{
+    margin-left: 1em;
+    cursor: pointer;
 }
 
 .label{
-    width: 60%;
+    width: 90%;
     /* margin: 90px auto; */
     display: grid;
     grid-template-areas: "input";
@@ -159,6 +166,12 @@ button{
 :not(:placeholder-shown)) + .labelName{
     transform: translateY(-50%) scale(.7);
     background-color: #d0d0d0;
+}
+
+.formTabla{
+    display: flex;
+    width: 65%;
+    justify-content: center;
 }
 
 .usersContainer{

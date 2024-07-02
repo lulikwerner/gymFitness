@@ -16,24 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(logInDataJSON)
             });
 
-            // Convertir la respuesta a JSON
+            if (!response.ok) {
+                throw new Error('Error al logearse');
+            }
+
             const responseData = await response.json();
             console.log('Respuesta del servidor:', responseData);
 
-            if (!response.ok) {
-                throw new Error(responseData.error || 'Error al logearse');
+            if (responseData.message === 'Usuario logeado correctamente' && responseData.tokenuser) {
+                // Redirigir a profile.html con el token de usuario
+                window.location.href = `/profile.html?token=${responseData.tokenuser}`;
+            } else if (responseData.message === 'Usuario admin logeado correctamente' && responseData.token) {
+                // Redirigir a admin.html con el token de administrador
+                window.location.href = `/admin.html?token=${responseData.token}`;
+            } else {
+                // Mostrar un mensaje de error genérico si el tipo de usuario no está reconocido
+                showAlert('Error al logearse. Tipo de usuario desconocido.');
             }
-
-            // Mostrar mensaje de éxito
-            showAlert('Usuario logeado exitosamente');
-
-            // Esperar 1 segundo antes de redirigir
-            setTimeout(() => {
-                if (responseData.message === 'Usuario logeado correctamente' && responseData.tokenuser) {
-                    // Redirigir a profile.html con el token
-                    window.location.href = `/profile.html?token=${responseData.tokenuser}`;
-                }
-            }, 1000);
 
         } catch (error) {
             console.error('Error:', error.message);

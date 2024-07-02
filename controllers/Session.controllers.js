@@ -91,7 +91,8 @@ export default class SessionControllers {
                     maxAge: 3600000
                 });
         
-                return res.status(200).json({ message: 'Usuario admin logeado correctamene', token });
+                return res.status(200).json({ message: 'Usuario admin logeado correctamente', token });
+               // return res.redirect(`/admin.html?token=${token}`);
             }
         
             // Busca el usuario por correo electrónico en la base de datos

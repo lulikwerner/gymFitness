@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const userRow = document.createElement('tr');
             userRow.classList.add('card');
             let td = "";
-            switch(user.fk_idplan){
+            /*switch(user.fk_idplan){
                 case 1:
                     td = "<td>Básico</td>";
                     break;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     break;
                 default:
                     break;
-            }
+            }*/
             userRow.innerHTML = `
                 <td>${user.iduser}</td>
                 <td>${user.name}</td>

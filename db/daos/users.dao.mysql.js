@@ -30,7 +30,11 @@ export default class UsersDaoMysql extends MySql {
     }
 
     async getUserByEmail(email) {
-        const query = `SELECT * FROM ${this.table} WHERE email = ?`;
+        const query = `
+            SELECT u.*, p.nombre AS nombre_plan 
+            FROM ${this.table} u 
+            LEFT JOIN plan p ON u.fk_idplan = p.idplan 
+            WHERE u.email = ?`;
         try {
             const [rows, fields] = await this.connection.promise().query(query, [email]);
             if (rows.length > 0) {
@@ -43,6 +47,7 @@ export default class UsersDaoMysql extends MySql {
             throw error;
         }
     }
+    
 /**
  * Agrega el usuario a la bd
  * @param {{name:string, email:string, age:int, password:string}} user Datos recibidos del usuario
@@ -95,15 +100,6 @@ export default class UsersDaoMysql extends MySql {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
     async deleteUser(id) {
         const query = `DELETE FROM ${this.table} WHERE iduser = ?`;
         const [result] = await this.connection.promise().query(query, [id]);

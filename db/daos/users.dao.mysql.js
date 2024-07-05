@@ -24,7 +24,9 @@ export default class UsersDaoMysql extends MySql {
     }
 
     async getAllUsers() {
-        const query = `SELECT * FROM ${this.table}`;
+        const query = `SELECT u.*, p.nombre AS nombre_plan 
+        FROM ${this.table} u 
+        INNER JOIN plan p ON u.fk_idplan = p.idplan`;
         const [result] = await this.connection.promise().query(query);
         return result;
     }

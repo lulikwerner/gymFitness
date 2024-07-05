@@ -21,13 +21,14 @@
 body{
     height: 100vh;
     width: 100vw;
+    position: relative;
     background-color: #adadad;
     /* background-size: cover;
     background-position: center; */
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -45,12 +46,13 @@ nav{
 }
 
 main{
-    height: 75%;
+    height: 87%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1em;
 }
 
 button{
@@ -100,23 +102,62 @@ button{
     justify-content: flex-end;
 }
 
-.logOut, .btn-delete, .searchFormButton{
+.logOut, .btn-delete, .searchFormButton,
+ .searchFormButton, .btn-edit, .addTrainerButton,
+  .cancelEdit, .createTrainerButton, .cancelCreate,
+   .editTrainerButton, .addPlanButton, .editPlanButton, .createPlanButton{
     background-color: transparent;
     padding: .6em;
     border-radius:.6em;
     font-weight: 700;
     border: 1px solid black;
     transition: background-color .5s ease;
+    cursor: pointer;
 }
 
-.logOut:hover, .btn-delete:hover, .searchFormButton:hover{
+.logOut:hover, .btn-delete:hover, .searchFormButton:hover,
+ .btn-edit:hover, .addTrainerButton:hover, .cancelEdit:hover,
+  .createTrainerButton:hover, .cancelCreate:hover,
+   .editTrainerButton:hover, .addPlanButton:hover, .editPlanButton:hover,
+   .createPlanButton:hover{
     color: white;
     background-color: black;
 }
 
-.logOut, .btn-delete, .searchFormButton{
+.logOut, .btn-delete, .searchFormButton,
+ .btn-edit, .addTrainerButton, .cancelEdit,
+  .createTrainerButton, .cancelCreate, .editTrainerButton,
+   .addPlanButton, .editPlanButton, .createPlanButton{
     color: black;
     transition: color .2s ease;
+}
+
+.buttonsSections{
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonsSections button{
+    background-color: transparent;
+    cursor: pointer;
+    padding: .6em .6em 0em .6em;
+    font-weight: 700;
+}
+
+.selected{
+    color: #f5f5f5;
+    border-bottom: 1px solid  black;
+}
+
+.mainContainer{
+    width: 100%;
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #searchForm{
@@ -180,7 +221,7 @@ button{
     width: 90%;
 }
 
-#userdisplay{
+#userdisplay, .trainerDisplay, .planDisplay{
     width: 100%;
     border: 1px solid black;
     text-align: center;
@@ -193,25 +234,62 @@ td, th{
     padding: 1em;
 }
 
-footer{
-    height: 9vh;
+.trainersMainContainer{
+    display: none;
+    justify-content: space-evenly;
+}
+
+.plansMainContainer{
+    display: none;
+    justify-content: space-evenly;
+}
+
+.trainersContainer, .plansContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+.editFormContainer, .createFormContainer, .createPlanFormContainer, .editPlanFormContainer{
+    position: fixed;
+    z-index: 1;
+    display: none;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 100%;
+    background-color: #00000055;
 }
 
-.foot {
-    width: 100%;
-    background-color: rgb(151, 151, 151);
-    color: black; 
-    padding: 20px; 
-    text-align: center; 
+.editTrainer, .createTrainer, .createPlan, .editPlan{
+    position: relative;
+    width: 60%;
+    height: 80%;
+    background-color: #adadad;
+    border-radius: .6em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: .6em;
+    border: 1px solid black;
 }
 
-.foot i {
-    font-size: 24px; 
-    margin-right: 20px; 
+.editFormSelect, .createFormSelect, .editFormDesc, .createFormDesc, .editFormImg, .createFormImg{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 90%;
 }
 
-.foot i:hover {
-    color: white;
-    cursor: pointer; 
+.editFormDesc, .createFormDesc{
+    height: 15%;
+}
+
+.editFormButtons, .createFormButtons{
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
 }

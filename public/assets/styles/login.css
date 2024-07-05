@@ -176,7 +176,7 @@ legend{
     background-color: #d0d0d0;
 }
 
-.signIn{
+.logInButton{
     font-size: 1em;
     border: 1px solid black;
     color: black;
@@ -187,7 +187,7 @@ legend{
     padding: .7em;
 }
 
-.signIn:hover{
+.logInButton:hover{
     background-color: black;
     color: white;
 }

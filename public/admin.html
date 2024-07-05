@@ -30,40 +30,175 @@
         </nav>
     </header>
     <main>
-        <h1>Usuarios</h1>
-        <div class="formTabla">
-            <form action="/api/users/:${email}" method="GET" id="searchForm">
-                <label for="buscar" class="label">
-                    <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
-                    <span class="labelName">Buscar</span>
-                </label>
-                <input type="submit" value="Buscar" class="searchFormButton">
-            </form>
-            <button class="searchFormButton tabla">Volver a la tabla</button>
+        <div class="buttonsSections">
+            <button class="users selected" data-target="usuariosMainContainer">USUARIOS</button>
+            <button class="trainers" data-target="trainersMainContainer">ENTRENADORES</button>
+            <button class="classes" data-target="plansMainContainer">PLANES</button>
         </div>
-        <div class="usersContainer">
-            <table id="userdisplay">
-                <!-- <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Edad</th>
-                    <th>Plan</th>
-                    <th> </th>
-                </tr> -->
-              <!-- Aquí se mostrarán los datos del usuario que traemos desde-->
-            </table>
+        <div class="usuariosMainContainer mainContainer">
+            <h2>Usuarios</h2>
+            <div class="formTabla">
+                <form action="/api/users/:${email}" method="GET" id="searchForm">
+                    <label for="buscar" class="label">
+                        <input type="text" name="buscar" autocomplete="on" placeholder=" " class="input">
+                        <span class="labelName">Buscar</span>
+                    </label>
+                    <input type="submit" value="Buscar" class="searchFormButton">
+                </form>
+                <button class="searchFormButton tabla">Volver a la tabla</button>
+            </div>
+            <div class="usersContainer">
+                <table id="userdisplay">
+                  <!-- Aquí se mostrarán los datos del usuario que traemos desde-->
+                </table>
+            </div>
+        </div>
+        <div class="trainersMainContainer mainContainer">
+            <h2>Entrenadores</h2>
+            <div class="trainersContainer usersContainer">
+                <button class="addTrainerButton">Agregar entrenador</button>
+                <table class="trainerDisplay">
+    
+                </table>
+            </div>
+        </div>
+        <div class="plansMainContainer mainContainer">
+            <h2>Planes</h2>
+            <div class="plansContainer usersContainer">
+                <button class="addPlanButton">Agregar plan</button>
+                <table class="planDisplay">
+                    
+                </table>
+            </div>
         </div>
     </main>
-    <footer>
-        <div class="foot">
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter"></i>
-        </div>
-    <!--boostrap?-->
-    </footer>
+
+    <div class="createFormContainer">
+        <form class="createTrainer" method="POST">
+            <label for="nombre" class="label">
+                <input id="nombre" name="nombre" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Nombre</span>
+            </label>
+            <label for="apellido" class="label">
+                <input id="apellido" name="apellido" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Apellido</span>
+            </label>
+            <label for="especialidad" class="label">
+                <select id="especialidad" name="especialidad" class="input">
+                    <option value="Yoga">Yoga</option>
+                    <option value="Boxeo">Boxeo</option>
+                    <option value="Bodybuild">Bodybuild</option>
+                </select>
+                <span class="labelName">Especialidad</span>
+            </label>
+            <label for="descripcion" class="label">
+                <textarea name="descripcion" id="descripcion" class="input"></textarea>
+                <span class="labelName">Descripción</span>
+            </label>
+            <label for="precio" class="label">
+                <input id="precio" name="precio" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Precio</span>
+            </label>
+            <div class="createFormImg">
+                <label for="imagen">Adjuntar fotografía:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+            </div>
+            <div class="createFormButtons">
+                <input type="submit" value="Crear" class="createTrainerButton">
+                <button class="cancelCreate">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="editFormContainer">
+        <form class="editTrainer" action="/api/trainers/${trainer.idpersonal}" method="POST">
+            <input type="hidden" name="idTrainer">
+            <label for="nombre" class="label">
+                <input id="nombre" name="nombre" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Nombre</span>
+            </label>
+            <label for="apellido" class="label">
+                <input id="apellido" name="apellido" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Apellido</span>
+            </label>
+            <label for="especialidad" class="label">
+                <select id="especialidad" name="especialidad" class="input">
+                    <option value="Yoga">Yoga</option>
+                    <option value="Boxeo">Boxeo</option>
+                    <option value="Bodybuild">Bodybuild</option>
+                </select>
+                <span class="labelName">Especialidad</span>
+            </label>
+            <label for="descripcion" class="label">
+                <textarea name="descripcion" id="descripcion" class="input"></textarea>
+                <span class="labelName">Descripción</span>
+            </label>
+            <label for="precio" class="label">
+                <input id="precio" name="precio" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Precio</span>
+            </label>
+            <div class="editFormImg">
+                <label for="imagen">Adjuntar fotografía:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+            </div>
+            <div class="editFormButtons">
+                <input type="submit" value="Editar" class="editTrainerButton">
+                <button class="cancelEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="createPlanFormContainer">
+        <form class="createPlan" method="POST">
+            <input type="hidden" name="idPlan">
+            <label for="nombre" class="label">
+                <input id="nombre" name="nombre" type="text" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Nombre</span>
+            </label>
+            <label for="precio" class="label">
+                <input id="precio" name="precio" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Precio</span>
+            </label>
+            <label for="duracion" class="label">
+                <select id="duracion" name="duracion" class="input">
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                </select>
+                <span class="labelName">Duración</span>
+            </label>
+            <div class="editFormButtons">
+                <input type="submit" value="Crear" class="createPlanButton">
+                <button class="cancelEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="editPlanFormContainer">
+        <form class="editPlan" action="/api/plans/${trainer.idplan}" method="POST">
+            <input type="hidden" name="idPlan">
+            <label for="nombre" class="label">
+                <input id="nombre" name="nombre" type="text" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Nombre</span>
+            </label>
+            <label for="precio" class="label">
+                <input id="precio" name="precio" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Precio</span>
+            </label>
+            <label for="duracion" class="label">
+                <select id="duracion" name="duracion" class="input">
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                </select>
+                <span class="labelName">Duración</span>
+            </label>
+            <div class="editFormButtons">
+                <input type="submit" value="Editar" class="editPlanButton">
+                <button class="cancelEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
     <script src="./js/admin.js"></script>
     <script src="./js/logout.js"></script>
 </body>

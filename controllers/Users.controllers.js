@@ -94,34 +94,36 @@ export default class UsersControllers {
     updateUser = async (req, res) => {
         const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
         const { plan } = req.body; // Datos actualizados del usuario: solo plan
-        const imagenPath = req.file ? req.file.path : null; // Obtener la ruta de la imagen si se cargó
+        const imagenPath = req.file ? `/assets/img/uploads/${req.file.filename}` : null; // Obtener la ruta de la imagen si se cargó
     
         // Crear objeto con los datos a actualizar
         const userData = {};
         
         // Actualizar userData con el plan si se proporcionó
         if (plan) {
-            userData.plan = plan;
+          userData.plan = plan;
         }
     
         // Actualizar userData con la ruta de la imagen si se proporcionó
         if (imagenPath) {
-            userData.imagen = imagenPath;
+          console.log('Archivo subido:', req.file);
+          userData.imagen = imagenPath;
         }
     
         try {
-            const result = await this.db.updateUser(userId, userData);
+          const result = await this.db.updateUser(userId, userData);
     
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ error: 'Usuario no encontrado' });
-            }
+          if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+          }
     
-            res.json({ message: 'Usuario actualizado con éxito' });
+          res.json({ message: 'Usuario actualizado con éxito' });
         } catch (error) {
-            console.error('Error al actualizar el usuario:', error);
-            res.status(500).json({ error: 'Error al actualizar el usuario' });
+          console.error('Error al actualizar el usuario:', error);
+          res.status(500).json({ error: 'Error al actualizar el usuario' });
         }
-    };
+      };
+    
     
 
 

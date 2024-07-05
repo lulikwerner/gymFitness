@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(logInDataJSON)
             });
 
-            if (!response.ok) {
-                throw new Error('Error al logearse');
-            }
-
             const responseData = await response.json();
             console.log('Respuesta del servidor:', responseData);
+
+            if (!response.ok) {
+                throw new Error(responseData.error || 'Error al logear usuario');
+            }
 
             if (responseData.message === 'Usuario logeado correctamente' && responseData.tokenuser) {
                 // Redirigir a profile.html con el token de usuario
@@ -44,3 +44,4 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(message);
     }
 });
+

@@ -1,5 +1,6 @@
 import express from 'express';
 import Routes from "./Routes.js";
+import { privacy } from '../config/auth.js';
 import PlansControllers from "../controllers/Plans.controllers.js";
 
 export default class PlanRoutes extends Routes {
@@ -12,10 +13,10 @@ export default class PlanRoutes extends Routes {
 
     getRouter() {
         this.router
-            .get('/', this.controller.getAllPlans)
-            .post('/', this.controller.addPlan)
-            .put('/:id', this.controller.updatePlan)
-            .delete('/:id', this.controller.deletePlan)
+            .get('/', privacy(['ADMIN']),this.controller.getAllPlans)//OK
+            .post('/', privacy(['ADMIN']),this.controller.addPlan)//OK
+            .put('/:id', privacy(['ADMIN']), this.controller.updatePlan)//OK
+            .delete('/:id',privacy(['ADMIN']), this.controller.deletePlan)//OK
         return this.router;
     }
 }

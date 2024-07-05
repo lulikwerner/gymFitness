@@ -1,6 +1,9 @@
 import express from 'express';
 import Routes from "./Routes.js";
+import { privacy } from '../config/auth.js';
 import SessionControllers from '../controllers/Session.controllers.js'; // Asegúrate de importar correctamente el controlador
+
+
 
 export default class SessionRoutes extends Routes {
 
@@ -13,10 +16,10 @@ export default class SessionRoutes extends Routes {
 
     getRouter() {
         this.router
-        .get('/check-token', this.controller.checkToken)
-        .post('/register', this.controller.register)
-        .post('/login', this.controller.login)
-        .post('/logout', this.controller.logout)
+        .get('/check-token', privacy(['NO_AUTH', 'PRIVATE']),this.controller.checkToken) //ok
+        .post('/register', privacy(['NO_AUTH']),this.controller.register)//ok
+        .post('/login',this.controller.login) //ok
+        .post('/logout', privacy(['PRIVATE']),this.controller.logout) //ok
         return this.router;
     }
 }

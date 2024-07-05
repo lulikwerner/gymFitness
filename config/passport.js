@@ -22,12 +22,12 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
         const user = await User.findById(jwt_payload.id);
 
         if (user) {
-            return done(null, user); // Si se encuentra el usuario, se devuelve
+            return done(null, user); 
         } else {
-            return done(null, false); // Si no se encuentra el usuario, se devuelve falso
+            return done(null, false); 
         }
     } catch (error) {
-        return done(error, false); // Si hay un error, se devuelve el error
+        return done(error, false); 
     }
 }));
 

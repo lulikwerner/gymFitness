@@ -15,11 +15,12 @@ dotenv.config();
 const app = express()
 const PORT = process.env.PORT || 8080;
 
+app.use(cookieParser());
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(passport.initialize());
-app.use(cookieParser());
+
 // Crear las instancias de las rutas
 const sessionRouter = new SessionRouter();
 const userRouter = new UserRouter();

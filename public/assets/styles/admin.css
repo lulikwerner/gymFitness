@@ -201,6 +201,7 @@ button{
     transition: transform .2s;
     transform-origin: center left;
     border-radius: .6em;
+    margin-bottom:.6em;
 }
 
 .input:where(:focus,

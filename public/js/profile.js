@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p><strong>Email:</strong> ${user.email}</p>
                         <p><strong>Edad:</strong> ${user.age}</p>
                         <p><strong>Plan:</strong> ${user.nombre_plan}</p>
+
                     </div>
                 </div>
                 <form id="updateForm" action="/api/users/${user.iduser}" method="POST">

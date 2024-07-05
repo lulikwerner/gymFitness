@@ -15,30 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(formDataJSON)
             });
-            // Convertir la respuesta a JSON
+
             const responseData = await response.json(); 
-            console.log('la resp',responseData)
+            console.log('Response data:', responseData);
+
             if (!response.ok) {
                 throw new Error(responseData.error || 'Error al registrar usuario');
             }
 
             showAlert('Usuario registrado exitosamente');
 
-            // Esperar 1 seg antes de redirigir
             setTimeout(() => {
                 window.location.href = '/login.html';
             }, 1000); 
         } catch (error) {
             console.error('Error:', error.message);
-            if (error.message === 'El email ya existe') {
-                showAlert('El email ya existe');
-                // Redirigir al login si el email ya existe
-                setTimeout(() => {
-                    window.location.href = '/login.html';
-                }, 1200); 
-            } else {
-                showAlert('Error al registrar usuario. Por favor completa todos los campos correctamente.');
-            }
+            showAlert(error.message);
         }
     });
 

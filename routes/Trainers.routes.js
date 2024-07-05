@@ -1,6 +1,7 @@
 import express from 'express';
 import Routes from "./Routes.js";
 import upload from "../config/multer.js"
+import { privacy } from '../config/auth.js';
 import TrainersControllers from "../controllers/Trainers.controller.js";
 
 export default class TrainerRoutes extends Routes {
@@ -13,10 +14,10 @@ export default class TrainerRoutes extends Routes {
 
     getRouter() {
         this.router
-            .get('/', this.controller.getAllTrainers)
-            .post('/', this.controller.addTrainer)
-            .put('/:id',  upload.single('imagen'),this.controller.updateTrainer)
-            .delete('/:id', this.controller.deleteTrainer)
+            .get('/', privacy(['ADMIN']),this.controller.getAllTrainers)//OK
+            .post('/',privacy(['ADMIN']), this.controller.addTrainer)//NO TENEMOS BOTON PARA AGREGAR
+            .put('/:id',  privacy(['ADMIN']), upload.single('imagen'),this.controller.updateTrainer)//OK
+            .delete('/:id', privacy(['ADMIN']), this.controller.deleteTrainer)//OK
         return this.router;
     }
 }

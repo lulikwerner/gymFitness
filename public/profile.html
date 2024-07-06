@@ -43,18 +43,18 @@
         </div>
     </main>
     <div class="editUserFormContainer">
-        <form class="editUserForm" action="/api/users/${user.iduser}" method="POST">
-            <input type="hidden" name="idUser">
+        <form id="editUserForm" class="editUserForm" enctype="multipart/form-data" method="PUT" >
+            <input type="hidden" id="idUser" name="idUser" value="${user.iduser}">
             <label for="name" class="label">
-                <input id="name" name="name" autocomplete="on" placeholder=" " class="input"></input>
+                <input id="name" name="name" autocomplete="on" placeholder=" " class="input">
                 <span class="labelName">Nombre</span>
             </label>
             <label for="lastname" class="label">
-                <input id="lastname" name="lastname" autocomplete="on" placeholder=" " class="input"></input>
+                <input id="lastname" name="lastname" autocomplete="on" placeholder=" " class="input">
                 <span class="labelName">Apellido</span>
             </label>
             <label for="age" class="label">
-                <input id="age" name="age" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <input id="age" name="age" type="number" autocomplete="on" placeholder=" " class="input">
                 <span class="labelName">Edad</span>
             </label>
             <label for="plan" class="label">
@@ -66,20 +66,20 @@
                 <span class="labelName">Plan</span>
             </label>
             <label for="password" class="label">
-                <input id="password" name="password" type="password" autocomplete="on" placeholder=" " class="input"></input>
+                <input id="password" name="password" type="password" autocomplete="on" placeholder=" " class="input">
                 <span class="labelName">Contraseña nueva</span>
             </label>
             <label for="password2" class="label">
-                <input id="password2" name="password2" type="password" autocomplete="on" placeholder=" " class="input"></input>
+                <input id="password2" name="password2" type="password" autocomplete="on" placeholder=" " class="input">
                 <span class="labelName">Repetir contraseña</span>
             </label>
             <div class="createFormImg">
-                <label for="imagen">Adjuntar fotografía:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*">
+                <label for="avatar">Adjuntar fotografía:</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*">
             </div>
             <div class="editFormButtons">
                 <input type="submit" value="Editar" class="editUserButton">
-                <button class="cancelEdit">Cancelar</button>
+                <button type="button" class="cancelEdit">Cancelar</button>
             </div>
         </form>
     </div>

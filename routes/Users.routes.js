@@ -1,6 +1,6 @@
 import express from 'express';
 import Routes from "./Routes.js";
-import upload from "../config/multer.js";
+import upload from '../config/multer.js';
 import { privacy } from '../config/auth.js';
 import UsersControllers from "../controllers/Users.controllers.js";
 
@@ -19,7 +19,7 @@ export default class UserRoutes extends Routes {
             .get('/profile', privacy(['PRIVATE']),this.controller.getProfile)
             .get('/:email', privacy(['PRIVATE']),this.controller.getUserByID) 
             .post('/', privacy(['NO_AUTH','PRIVATE']),this.controller.addUser)
-            .put('/:id', upload.single('imagen'), privacy(['PRIVATE']), this.controller.updateUser)
+            .put('/:id', upload.single('avatar'), privacy(['PRIVATE']), this.controller.updateUser)
             .delete('/:id', privacy(['ADMIN']), this.controller.deleteUser);
         return this.router;
     }

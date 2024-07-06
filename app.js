@@ -1,8 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
-// import { authRoutes } from './auth/index.js';
-//import session from "express-session"
 import passport from './config/passport.js'
 import SessionRouter from "./routes/Session.routes.js"
 import UserRouter from "./routes/Users.routes.js"

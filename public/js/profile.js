@@ -1,10 +1,3 @@
-const editUserFormContainer = document.querySelector(".editUserFormContainer");
-const editUserForm = document.querySelector(".editUserForm");
-const cancelEditButton = editUserForm.querySelector(".cancelEdit");
-const addUserClassFormContainer = document.querySelector(".addUserClassFormContainer");
-const addUserClassForm = document.querySelector(".addUserClassForm");
-const cancelAddUserClassButton = addUserClassForm.querySelector(".cancelEdit");
-
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -27,28 +20,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar la información del usuario en el HTML
         const userProfileContainer = document.querySelector('.userProfileContainer');
         const userClassContainer = document.querySelector(".userClassContainer");
-        //Le saco el public de la ruta imagen
         const imageUrl = user.imagen.replace('public', '..').replace(`\ `,"/");
-        // const imageUrl = `../assets/img/users/persona.webp`;
+        console.log('laimagendelusuario',imageUrl)
         userProfileContainer.innerHTML = `
-                                    <div class="profileImg">
-                                        <img src="${imageUrl}" alt="Imagen de perfil">
-                                    </div>
-                                    <div class="profileText">
-                                        <p><span>Nombre:</span> ${user.name}</p>
-                                        <p><span>Apellido:</span> ${user.lastname}</p>
-                                        <p><span>Email:</span> ${user.email}</p>
-                                        <p><span>Edad:</span> ${user.age}</p>
-                                        <p><span>Plan:</span> ${user.nombre_plan}</p>
-                                        <button class="showUpdateUserFormContainer" data-user="${user.iduser}">Modificar datos</button>
-                                    </div>`;
+            <div class="profileImg">
+                <img src="${imageUrl}" alt="Imagen de perfil">
+            </div>
+            <div class="profileText">
+                <p><span>Nombre:</span> ${user.name}</p>
+                <p><span>Apellido:</span> ${user.lastname}</p>
+                <p><span>Email:</span> ${user.email}</p>
+                <p><span>Edad:</span> ${user.age}</p>
+                <p><span>Plan:</span> ${user.nombre_plan}</p>
+                <button class="showUpdateUserFormContainer" data-user="${user.iduser}">Modificar datos</button>
+            </div>`;
         userClassContainer.innerHTML = `
-                                    <h2>Clases</h2>
-                                    <button class="addUserClass">Agregar clase</button>
-                                    <table class="userClasses">
-                                    </table>`;
+            <h2>Clases</h2>
+            <div class="form-group">
+                <label for="class">Seleccionar una clase:</label>
+                <select id="class" name="class" required>
+                    <option value="Boxeo">Boxeo</option>
+                    <option value="Boxeo_sauna">Boxeo Sauna</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="Bodybuild">BodyBuilding</option>
+                </select>
+                <button class="addUserClass">Agregar clase</button>
+            </div>`;
 
         const showUpdateUserFormContainer = document.querySelector(".showUpdateUserFormContainer");
+        const editUserFormContainer = document.querySelector('.editUserFormContainer');
+        const editUserForm = document.querySelector('.editUserForm');
+        const cancelEditButton = document.querySelector('.cancelEdit');
+
         showUpdateUserFormContainer.addEventListener("click", () => {
             editUserFormContainer.style.display = "flex"
             editUserForm.querySelector('input[name="idUser"]').value = user.iduser;
@@ -59,63 +62,64 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         const addUserClass = document.querySelector(".addUserClass");
+        const addUserClassFormContainer = document.querySelector(".addUserClassFormContainer");
+
         addUserClass.addEventListener("click", () => {
             addUserClassFormContainer.style.display = "flex"
         });
-        // Escuchar el evento click del botón de actualización
+
+        // Escuchar el evento submit del formulario editUserForm
         editUserForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const formData = new FormData(editUserForm);
             const formDataJSON = Object.fromEntries(formData.entries());
-        
+            console.log('formData', formData)
+            const avatarInput = document.getElementById('avatar');
+            console.log(avatarInput)
             try {
-                const putResponse = await fetch(`/api/users/${user.iduser}`, {
+                // Realizar la solicitud PUT utilizando fetch
+                const putResponse = await fetch(`/api/users/${formDataJSON.idUser}`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(formDataJSON)
+                    body: formData,
                 });
         
-
-            const result = await putResponse.json();
-            if(result)
-            alert('Los cambios fueron realizados')
-            // Recargar la página actual después de 1 segundo (ajusta el tiempo según sea necesario)
-            setTimeout(() => {
-                window.location.reload();
-            }, 500); // Recarga después de 1 segundo
-
+                // Manejar la respuesta del servidor
+                if (putResponse.ok) {
+                    const result = await putResponse.json();
+                    console.log('Resultado de la solicitud PUT:', result);
+        
+                    alert('Los cambios fueron realizados');
+                    editUserFormContainer.style.display = 'none';
+                    // Recargar la página después de 1 segundo para reflejar los cambios
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    const result = await putResponse.json();
+                    if (result && result.error) {
+                        alert(`Error: ${result.error}`);
+                    } else {
+                        alert('Error desconocido al procesar la solicitud.');
+                    }
+                }
             } catch (error) {
                 console.error('Error en la solicitud PUT:', error);
+                alert('Hubo un error en la solicitud PUT. Consulta la consola para más detalles.');
             }
         });
-
+        
+        // Event listener para el botón de cancelar en el formulario de edición
+        cancelEditButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            editUserFormContainer.style.display = 'none';
+        });
     } catch (error) {
-        console.error('Error al obtener perfil de usuario:', error);
-        const userProfileDiv = document.getElementById('userProfile');
-        userProfileDiv.innerHTML = `<p>Error al obtener el perfil del usuario.</p>`;
+        console.error('Error al obtener datos del perfil:', error);
+        alert('Error al obtener datos del perfil. Consulta la consola para más detalles.');
     }
+
 });
-
-cancelEditButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    editUserFormContainer.style.display = "none"
-});
-
-cancelAddUserClassButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    addUserClassFormContainer.style.display = "none"
-});
-
-
-
-// addUserClassForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const formData = new FormData(addUserClassForm);
-//     const formDataJSON = Object.fromEntries(formData.entries());
-
-
-// })

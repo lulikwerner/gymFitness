@@ -3,7 +3,6 @@ export const cookieExtractor = (req) => {
   
     if (req && req.cookies) {
       token = req.cookies['token'];
-      console.log('eltoken en el cookies',token)
     }
   
     return token;

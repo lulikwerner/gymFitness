@@ -13,7 +13,7 @@ export default class UsersControllers {
         this.db = new UsersDaoMysql()
         this.userHelpers = new UsersHelpers()
     }
-//Middleware multer
+    //Middleware multer
     updateUserWithImage = multer({ storage: upload }).single('imagen');
 
 
@@ -30,17 +30,17 @@ export default class UsersControllers {
             const token = req.headers.authorization.split(' ')[1]; // Obtener el token del encabezado
             const decodedToken = decodeToken(token);
             const userEmail = decodedToken.email;
-            if(userEmail=== process.env.ADMIN_EMAIL){
-        const users = await this.db.getAllUsers()
-        res.status(200).json({ users });
+            if (userEmail === process.env.ADMIN_EMAIL) {
+                const users = await this.db.getAllUsers()
+                res.status(200).json({ users });
             }
-            else{
+            else {
                 return res.status(403).json({ error: 'No tienes permisos suficientes' });
             }
-    } catch (error) {
-        console.error('Error al obtener perfil de usuario:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
+        } catch (error) {
+            console.error('Error al obtener perfil de usuario:', error);
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
     }
     // Ruta para obtener el perfil del usuario autenticado
     getProfile = async (req, res) => {
@@ -65,10 +65,10 @@ export default class UsersControllers {
         }
     }
 
-    getUserByID = async(req, res) =>{
+    getUserByID = async (req, res) => {
         const { email } = req.params;
         try {
-           const user = await this.db.getUserByEmail(email);
+            const user = await this.db.getUserByEmail(email);
 
             if (!user) {
                 return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -88,16 +88,16 @@ export default class UsersControllers {
     }
 
     updateUser = async (req, res) => {
-        const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
-        const { name, lastname, age, plan, password, password2 } = req.body; // Datos actualizados del usuario: solo plan
-        const imagen = req.file ? `/assets/img/uploads/${req.file.filename}` : null; // Obtener la ruta de la imagen si se cargó
+        const userId = req.params.id; 
+        const { name, lastname, age, plan, password, password2 } = req.body; 
+        let imagen = req.file ? `/assets/img/uploads/${req.file.filename}` : null; 
     
         // Crear objeto con los datos a actualizar
         const userData = {};
-        
-        // Actualizar userData con el plan si se proporcionó
+    
+        // Actualizar userData con los campos proporcionados
         if (name) {
-          userData.name = name;
+            userData.name = name;
         }
         if (lastname) {
             userData.lastname = lastname;
@@ -105,11 +105,11 @@ export default class UsersControllers {
         if (age) {
             userData.age = age;
         }
-        if(password.trim() !== "" && password2.trim() !== ""){
+        if (password.trim() !== "" && password2.trim() !== "") {
             if (password !== password2) {
                 console.log('Passwords do not match');
                 return res.status(400).json({ error: 'Las contraseñas no coinciden' });
-            } else{
+            } else {
                 const hash = bcrypt.hashSync(password, 10);
                 userData.password = hash;
             }
@@ -117,27 +117,27 @@ export default class UsersControllers {
         if (plan) {
             userData.plan = plan;
         }
-        // Actualizar userData con la ruta de la imagen si se proporcionó
+
         if (imagen) {
-          console.log('Archivo subido:', req.file);
-          userData.imagen = imagen;
+            userData.imagen = imagen;
         }
     
         try {
-          const result = await this.db.updateUser(userId, userData);
+            const result = await this.db.updateUser(userId, userData);
     
-          if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
-          }
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: 'Usuario no encontrado' });
+            }
     
-          res.json({ message: 'Usuario actualizado con éxito' });
+            res.json({ message: 'Usuario actualizado con éxito' });
         } catch (error) {
-          console.error('Error al actualizar el usuario:', error);
-          res.status(500).json({ error: 'Error al actualizar el usuario' });
+            console.error('Error al actualizar el usuario:', error);
+            res.status(500).json({ error: 'Error al actualizar el usuario' });
         }
-      };
+    };
     
-    
+
+
 
 
 

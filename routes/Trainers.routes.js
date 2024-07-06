@@ -15,7 +15,7 @@ export default class TrainerRoutes extends Routes {
     getRouter() {
         this.router
             .get('/', privacy(['ADMIN']),this.controller.getAllTrainers)//OK
-            .post('/',privacy(['ADMIN']), this.controller.addTrainer)//NO TENEMOS BOTON PARA AGREGAR
+            .post('/',privacy(['ADMIN']), this.controller.addTrainer)//OK
             .put('/:id',  privacy(['ADMIN']), upload.single('imagen'),this.controller.updateTrainer)//OK
             .delete('/:id', privacy(['ADMIN']), this.controller.deleteTrainer)//OK
         return this.router;

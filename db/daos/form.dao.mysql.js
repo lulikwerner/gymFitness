@@ -50,10 +50,10 @@ export default class FormDaoMysql extends MySql {
  */
 async addForm(form) {
     try {
-        const { name, lastname, email, telephone, message, plan, radio, imagen } = form;
+        const { name, lastname, email, telephone, message, plan, conocio, imagen } = form;
         const query = `INSERT INTO ${this.table} (nombre, apellido, email, telefono, mensaje, plan, conocio, imagen) 
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-        const [result] = await this.connection.promise().query(query, [name, lastname, email, telephone, message, plan, radio, imagen]);
+        const [result] = await this.connection.promise().query(query, [name, lastname, email, telephone, message, plan, conocio, imagen]);
         return result;
     } catch (error) {
         console.error('Error adding form:', error);

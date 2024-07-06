@@ -28,12 +28,15 @@ export default class FormControllers {
   
             const formData = this.formHelpers.parseContact(req.body);
 
+            console.log(req.body);
             // Obtener el nombre del archivo adjunto desde req.file
             const imagen = req.file ? req.file.filename : null;
+            const plan = req.body.plan;
+            const conocio = req.body.conociste;
+            console.log("conociste? ", conocio);
 
             // Combinar datos del formulario con la imagen
-            const form = { ...formData, imagen };
-
+            const form = { ...formData, plan, conocio, imagen };
             // Llamar a la función addForm de la base de datos para guardar el formulario
             const result = await this.db.addForm(form);
             res.status(200).json({ message: '¡Formulario enviado con éxito!', result });

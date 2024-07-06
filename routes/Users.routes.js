@@ -23,5 +23,4 @@ export default class UserRoutes extends Routes {
             .delete('/:id', privacy(['ADMIN']), this.controller.deleteUser);
         return this.router;
     }
-
 }

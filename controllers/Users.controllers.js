@@ -2,7 +2,6 @@ import multer from 'multer'
 import upload from '../config/multer.js'
 import { decodeToken } from '../config/jwtUtils.js';
 //import User from '../models/Users.js'
-import UsersDaoMemory from '../db/daos/users.dao.memory.js'
 import UsersDaoMysql from '../db/daos/users.dao.mysql.js'
 import UsersHelpers from '../helpers/users.helpers.js'
 
@@ -10,11 +9,7 @@ import UsersHelpers from '../helpers/users.helpers.js'
 export default class UsersControllers {
 
     constructor() {
-        if (process.argv[2] === 'dev')
-            this.db = new UsersDaoMemory()
-        if (process.argv[2] === 'prod')
-            this.db = new UsersDaoMysql()
-
+        this.db = new UsersDaoMysql()
         this.userHelpers = new UsersHelpers()
     }
 //Middleware multer
@@ -93,21 +88,40 @@ export default class UsersControllers {
 
     updateUser = async (req, res) => {
         const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
-        const { plan } = req.body; // Datos actualizados del usuario: solo plan
+        const { name, lastname, age, plan, password, password2, imagen } = req.body; // Datos actualizados del usuario: solo plan
         const imagenPath = req.file ? `/assets/img/uploads/${req.file.filename}` : null; // Obtener la ruta de la imagen si se cargó
     
         // Crear objeto con los datos a actualizar
         const userData = {};
         
         // Actualizar userData con el plan si se proporcionó
-        if (plan) {
-          userData.plan = plan;
+        if (name) {
+          userData.name = name;
         }
+        if (lastname) {
+            userData.lastname = lastname;
+        }
+        if (age) {
+            userData.age = age;
+        }
+        if(password.trim() !== "" && password2.trim() !== ""){
+            if (password !== password2) {
+                console.log('Passwords do not match');
+                return res.status(400).json({ error: 'Las contraseñas no coinciden' });
+            } else{
+                const hash = bcrypt.hashSync(password, 10);
+                userData.password = hash;
+            }
+        }
+        if (plan) {
+            userData.plan = plan;
+        }
+
     
         // Actualizar userData con la ruta de la imagen si se proporcionó
-        if (imagenPath) {
+        if (imagen) {
           console.log('Archivo subido:', req.file);
-          userData.imagen = imagenPath;
+          userData.imagen = imagen;
         }
     
         try {

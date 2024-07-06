@@ -33,9 +33,65 @@
         <h1>Perfil de Usuario</h1>
       
         <div id="userProfile">
+            <div class="userProfileContainer">
+
+            </div>
+            <div class="userClassContainer">
+
+            </div>
           <!-- Aquí se mostrarán los datos del usuario que traemos desde-->
         </div>
     </main>
+    <div class="editUserFormContainer">
+        <form class="editUserForm" action="/api/users/${user.iduser}" method="POST">
+            <input type="hidden" name="idUser">
+            <label for="name" class="label">
+                <input id="name" name="name" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Nombre</span>
+            </label>
+            <label for="lastname" class="label">
+                <input id="lastname" name="lastname" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Apellido</span>
+            </label>
+            <label for="age" class="label">
+                <input id="age" name="age" type="number" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Edad</span>
+            </label>
+            <label for="plan" class="label">
+                <select id="plan" name="plan" class="input">
+                    <option value="Básico">Básico</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                </select>
+                <span class="labelName">Especialidad</span>
+            </label>
+            <label for="password" class="label">
+                <input id="password" name="password" type="password" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Contraseña nueva</span>
+            </label>
+            <label for="password2" class="label">
+                <input id="password2" name="password2" type="password" autocomplete="on" placeholder=" " class="input"></input>
+                <span class="labelName">Repetir contraseña</span>
+            </label>
+            <div class="createFormImg">
+                <label for="imagen">Adjuntar fotografía:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+            </div>
+            <div class="editFormButtons">
+                <input type="submit" value="Editar" class="editUserButton">
+                <button class="cancelEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="addUserClassFormContainer">
+        <form class="addUserClassForm" method="POST">
+            <input type="hidden" name="idUser">
+            <div class="editFormButtons">
+                <input type="submit" value="Editar" class="addUserClassButton">
+                <button class="cancelEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
     <footer>
         <div class="foot">
             <i class="fab fa-instagram"></i>

@@ -19,6 +19,7 @@
 }
 
 body{
+    position: relative;
     height: 100vh;
     width: 100vw;
     background-color: #adadad;
@@ -100,39 +101,80 @@ button{
     justify-content: flex-end;
 }
 
-.logOut, #updateButton{
+.logOut, .editUserButton, .cancelEdit, .addUserClass, .showUpdateUserFormContainer, .addUserClassButton{
     background-color: transparent;
     padding: .6em;
     border-radius:.6em;
     font-weight: 700;
     border: 1px solid black;
-    transition: background-color .5s ease;
+    color: black;
+    transition: color .5s ease, background-color .5s ease;
 }
 
-.logOut:hover, #updateButton:hover{
+.logOut:hover, #updateButton:hover, .editUserButton:hover,
+ .cancelEdit:hover, .addUserClass:hover, .showUpdateUserFormContainer:hover,
+ .addUserClassButton:hover{
     background-color: black;
-}
-
-.logOut:hover, #updateButton:hover{
     color: white;
 }
 
-.logOut, #updateButton{
-    color: black;
-    transition: color .5s ease;
+.label{
+    width: 90%;
+    /* margin: 90px auto; */
+    display: grid;
+    grid-template-areas: "input";
+}
+
+.input{
+    grid-area: input;
+    width: 100%;
+    font: inherit;
+    border-radius: .6em;
+    border: 1px solid black;
+    padding: .7rem 1.5rem;
+    background-color: #d0d0d0;
+}
+
+.labelName{
+    grid-area: input;
+    z-index: 100;
+    width: max-content;
+    margin-left: 1rem;
+    padding: 0 .5rem;
+    align-self: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: transform .2s;
+    transform-origin: center left;
+    border-radius: .6em;
+    /* margin-bottom:.6em; */
+}
+
+.input:where(:focus,
+:not(:placeholder-shown)) + .labelName{
+    transform: translateY(-50%) scale(.7);
+    background-color: #d0d0d0;
 }
 
 #userProfile{
     width: 100%;
-    height: 85%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.userProfileContainer{
+.userProfileContainer, .userClassContainer{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
+    width: 45%;
     height: 100%;
+}
+
+.userClassContainer{
+    flex-direction: column;
 }
 
 .profileData{
@@ -143,9 +185,14 @@ button{
     height: 80%;
 }
 
+.profileText span{
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
 .profileImg{
     width: 50%;
-    height: 100%;
+    height: 70%;
     overflow: hidden;
     border-radius: 45%;
 }
@@ -163,38 +210,36 @@ button{
     align-items: flex-start;
 }
 
-form{
-    width: 45%;
+.editUserFormContainer, .addUserClassFormContainer{
+    position: fixed;
+    z-index: 1;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #00000055;
+}
+
+.editUserForm, .addUserClassForm{
+    position: relative;
+    width: 60%;
     height: 80%;
+    background-color: #adadad;
+    border-radius: .6em;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    padding: .6em;
     border: 1px solid black;
-    border-radius: 1em;
-    background-color: #9d9d9d;
 }
 
-fieldset{
+.createFormImg{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 30%;
-    width: 100%;
-}
-
-legend{
-    text-align: center;
-}
-
-.form-img{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 20%;
-    width: 100%;
+    align-items: start;
+    width: 90%;
 }
 
 footer{

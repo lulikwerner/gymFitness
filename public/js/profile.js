@@ -1,3 +1,10 @@
+const editUserFormContainer = document.querySelector(".editUserFormContainer");
+const editUserForm = document.querySelector(".editUserForm");
+const cancelEditButton = editUserForm.querySelector(".cancelEdit");
+const addUserClassFormContainer = document.querySelector(".addUserClassFormContainer");
+const addUserClassForm = document.querySelector(".addUserClassForm");
+const cancelAddUserClassButton = addUserClassForm.querySelector(".cancelEdit");
+
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -18,70 +25,68 @@ document.addEventListener('DOMContentLoaded', async () => {
         const user = data.user;
 
         // Mostrar la información del usuario en el HTML
-        const userProfileDiv = document.getElementById('userProfile');
+        const userProfileContainer = document.querySelector('.userProfileContainer');
+        const userClassContainer = document.querySelector(".userClassContainer");
         //Le saco el public de la ruta imagen
         const imageUrl = user.imagen.replace('public', '..').replace(`\ `,"/");
         // const imageUrl = `../assets/img/users/persona.webp`;
-        userProfileDiv.innerHTML = `
-            <div class="userProfileContainer">
-                <div class="profileData">
-                    <div class="profileImg">
-                        <img src="${imageUrl}" alt="Imagen de perfil">
-                    </div>
-                    <div class="profileText">
-                        <p><strong>Nombre:</strong> ${user.name}</p>
-                        <p><strong>Apellido:</strong> ${user.lastname}</p>
-                        <p><strong>Email:</strong> ${user.email}</p>
-                        <p><strong>Edad:</strong> ${user.age}</p>
-                        <p><strong>Plan:</strong> ${user.nombre_plan}</p>
+        userProfileContainer.innerHTML = `
+                                    <div class="profileImg">
+                                        <img src="${imageUrl}" alt="Imagen de perfil">
+                                    </div>
+                                    <div class="profileText">
+                                        <p><span>Nombre:</span> ${user.name}</p>
+                                        <p><span>Apellido:</span> ${user.lastname}</p>
+                                        <p><span>Email:</span> ${user.email}</p>
+                                        <p><span>Edad:</span> ${user.age}</p>
+                                        <p><span>Plan:</span> ${user.nombre_plan}</p>
+                                        <button class="showUpdateUserFormContainer" data-user="${user.iduser}">Modificar datos</button>
+                                    </div>`;
+        userClassContainer.innerHTML = `
+                                    <h2>Clases</h2>
+                                    <button class="addUserClass">Agregar clase</button>
+                                    <table class="userClasses">
+                                    </table>`;
 
-                    </div>
-                </div>
-                <form id="updateForm" action="/api/users/${user.iduser}" method="POST">
-                    <fieldset>
-                        <legend>¿Quieres cambiar tu plan?</legend>
-                        <div id="radio" class="radio-group">
-                            <input type="radio" id="basic" name="plan" value="1" checked>
-                            <label for="basic">Básico</label>
-                            <input type="radio" id="gold" name="plan" value="2">
-                            <label for="gold">Gold</label>
-                            <input type="radio" id="platinum" name="plan" value="3">
-                            <label for="platinum">Platinum</label>
-                        </div>
-                    </fieldset>
-                    <div class="form-img">
-                        <label for="imagen">Adjuntar fotografía:</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/*">
-                    </div>
-                    <button id="updateButton" type="button">Actualizar datos</button> <!-- Cambiado a type="button" -->
-                </form>
-            </div>
-        `;
+        const showUpdateUserFormContainer = document.querySelector(".showUpdateUserFormContainer");
+        showUpdateUserFormContainer.addEventListener("click", () => {
+            editUserFormContainer.style.display = "flex"
+            editUserForm.querySelector('input[name="idUser"]').value = user.iduser;
+            editUserForm.querySelector('input[name="name"]').value = user.name;
+            editUserForm.querySelector('input[name="lastname"]').value = user.lastname;
+            editUserForm.querySelector('input[name="age"]').value = user.age;
+            editUserForm.querySelector('input[name="especialidad"]').value = user.nombre_plan;
+        });
 
+        const addUserClass = document.querySelector(".addUserClass");
+        addUserClass.addEventListener("click", () => {
+            addUserClassFormContainer.style.display = "flex"
+        });
         // Escuchar el evento click del botón de actualización
-        const updateButton = document.getElementById('updateButton');
-        updateButton.addEventListener('click', async () => {
+        editUserForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-                const updateForm = document.getElementById('updateForm');
-                const formData = new FormData(updateForm);
-            
-                try {
-                    const putResponse = await fetch(`/api/users/${user.iduser}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                        },
-                        body: formData  
-                    });
-            
+            const formData = new FormData(editUserForm);
+            const formDataJSON = Object.fromEntries(formData.entries());
+        
+            try {
+                const putResponse = await fetch(`/api/users/${user.iduser}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataJSON)
+                });
+        
 
-                const result = await putResponse.json();
-                if(result)
-                alert('Los cambios fueron realizados')
-                // Recargar la página actual después de 1 segundo (ajusta el tiempo según sea necesario)
-        setTimeout(() => {
-            window.location.reload();
-        }, 500); // Recarga después de 1 segundo
+            const result = await putResponse.json();
+            if(result)
+            alert('Los cambios fueron realizados')
+            // Recargar la página actual después de 1 segundo (ajusta el tiempo según sea necesario)
+            setTimeout(() => {
+                window.location.reload();
+            }, 500); // Recarga después de 1 segundo
 
             } catch (error) {
                 console.error('Error en la solicitud PUT:', error);
@@ -94,3 +99,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         userProfileDiv.innerHTML = `<p>Error al obtener el perfil del usuario.</p>`;
     }
 });
+
+cancelEditButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    editUserFormContainer.style.display = "none"
+});
+
+cancelAddUserClassButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    addUserClassFormContainer.style.display = "none"
+});
+
+
+
+// addUserClassForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const formData = new FormData(addUserClassForm);
+//     const formDataJSON = Object.fromEntries(formData.entries());
+
+
+// })

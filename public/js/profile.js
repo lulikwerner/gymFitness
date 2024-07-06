@@ -67,8 +67,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (putResponse.ok) {
                     const result = await putResponse.json();
-                    console.log('Resultado de la solicitud PUT:', result);
-
                     alert('Los cambios fueron realizados');
                     editUserFormContainer.style.display = 'none';
                     setTimeout(() => {
@@ -143,7 +141,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const userClassTable = document.querySelector(".userClass");
             const data = await response.json();
-            console.log(data);
             data.result.forEach(results => {
                 const classRow = document.createElement('tr');
                 classRow.classList.add('card');

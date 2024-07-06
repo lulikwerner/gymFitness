@@ -11,7 +11,6 @@ export default class ClassesDaoMysql extends MySql {
          INNER JOIN class c ON c.idclase = u.idclase INNER JOIN personal_trainer p ON p.idpersonal = c.idpersonal
          WHERE u.iduser = ?`;
         const [result] = await this.connection.promise().query(query, [id]);
-        console.log(result);
         return result;
     }
 
@@ -32,7 +31,6 @@ export default class ClassesDaoMysql extends MySql {
                         WHERE u.idclase = ?
                     `;
         const [result] = await this.connection.promise().query(query, [id]);
-        console.log(result);
         return result;
     }
 }

@@ -109,7 +109,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const data = await response.json();
-        console.log(data);
         const trainersDiv = document.querySelector('.trainerDisplay');
         trainersDiv.innerHTML =     `<tr>
                                         <th>ID</th>
@@ -252,7 +251,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             btnEditPlan.addEventListener('click', () => {
                 editPlanFormContainer.style.display = "flex";
                 editPlanForm.querySelector('input[name="idPlan"]').value = plan.idplan;
-                console.log(editPlanForm.querySelector('input[name="idPlan"]').value);
                 editPlanForm.querySelector('input[name="nombre"]').value = plan.nombre;
                 editPlanForm.querySelector('input[name="precio"]').value = plan.precio;
                 editPlanForm.querySelector('select[name="duracion"]').value = plan.duracion;
@@ -294,7 +292,6 @@ searchForm.addEventListener('submit', async (event) => {
             }
 
             const data = await response.json();
-            console.log(data);
             usersContainer.innerHTML = `
                     <tr>
                         <th>ID</th>
@@ -393,7 +390,6 @@ createTrainerForm.addEventListener("submit", async (e) =>{
         });
         // Convertir la respuesta a JSON
         const responseData = await response.json(); 
-        console.log('la resp',responseData)
         if (!response.ok) {
             throw new Error(responseData.error || 'Error al crear entrenador');
         }
@@ -455,7 +451,6 @@ editTrainerForm.addEventListener("submit", async (e) => {
     const formDataJSON = Object.fromEntries(formData.entries());
 
     let trainerId = document.querySelector('input[name="idTrainer"]').value
-    console.log(trainerId);
     try {
         const putResponse = await fetch(`/api/trainers/${trainerId}`, {
             method: 'PUT',
@@ -496,7 +491,6 @@ createPlanForm.addEventListener("submit", async (e) =>{
         });
         // Convertir la respuesta a JSON
         const responseData = await response.json(); 
-        console.log('la resp',responseData)
         if (!response.ok) {
             throw new Error(responseData.error || 'Error al crear plan');
         }
@@ -522,10 +516,8 @@ editPlanForm.addEventListener("submit", async (e) => {
 
     const urlParams = new URLSearchParams(window.location.search);
     token = urlParams.get('token');
-    console.log(token);
 
     let planId = editPlanForm.querySelector('input[name="idPlan"]').value;
-    console.log(planId);
     const formData = new FormData(editPlanForm);
     const formDataJSON = Object.fromEntries(formData.entries());
 

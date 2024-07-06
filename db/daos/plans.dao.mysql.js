@@ -26,7 +26,6 @@ export default class PlansDaoMysql extends MySql {
    
     async updatePlan(planId, dataToUpdate) {
         const { nombre, precio, duracion } = dataToUpdate;
-        console.log('data a actualizar', dataToUpdate);
     
         const updateFields = [];
         const queryParams = [];

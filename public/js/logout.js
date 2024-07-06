@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   }
               });
               if (response.ok) {
-                  console.log('Cierre de sesión exitoso, redireccionando...');
                   window.location.href = '/index.html';
               } else {
                   console.error('Error al cerrar sesión:', response.statusText);

@@ -14,8 +14,6 @@ const opts = {
 
 // Utilizar la estrategia de JWT
 passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
-    console.log('Inicializando la estrategia');
-    console.log('Payload del token:', jwt_payload);
 
     try {
         // Buscar el usuario en la base de datos usando el ID del payload del token

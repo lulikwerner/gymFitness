@@ -11,10 +11,10 @@ export const privacy = (privacyType) => {
     if (!token) {
       // Si no hay token, redirigir según el caso de NO_AUTH
       if (privacyType.includes('NO_AUTH')) {
-        console.log('Acceso NO_AUTH permitido');
+
         next();
       } else {
-        console.log('Redirigiendo a /api/sessions/login');
+
         res.redirect('/api/sessions/login');
       }
       return;
@@ -29,34 +29,25 @@ export const privacy = (privacyType) => {
 
       // Verificar cada tipo de acceso en privacyType
       if (privacyType.includes('PRIVATE')) {
-        console.log('Acceso PRIVATE permitido');
         // Permitir acceso si es administrador o usuario normal
         if (user.email === process.env.ADMIN_EMAIL || user.email !== process.env.ADMIN_EMAIL) {
           next();
         } else {
-          console.log('No tiene permisos suficientes para realizar esta acción.');
-  
           res.redirect('/index');
         }
       } else if (privacyType.includes('ADMIN')) {
-        console.log('Acceso ADMIN permitido');
         if (user.email === process.env.ADMIN_EMAIL) {
           next();
         } else {
-          console.log('Debe estar logueado como administrador para realizar esta acción.');
-  
           res.redirect('/index');
         }
       } else if (privacyType.includes('NO_AUTH')) {
-        console.log('Acceso NO_AUTH permitido');
         if (!user) {
           next();
         } else {
-          console.log('Redirigiendo a /index');
           res.redirect('/index');
         }
       } else {
-        console.log('Caso por defecto');
         res.redirect('/index');
       }
     } catch (error) {

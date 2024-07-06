@@ -69,7 +69,6 @@ export default class UsersDaoMysql extends MySql {
    
     async updateUser(userId, dataToUpdate) {
         const { name, lastname, age, plan, password, imagen } = dataToUpdate;
-        console.log('data a actualizar', dataToUpdate);
     
         const updateFields = [];
         const queryParams = [];

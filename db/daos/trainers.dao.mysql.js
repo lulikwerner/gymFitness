@@ -26,7 +26,6 @@ export default class TrainersDaoMysql extends MySql {
    
     async updateTrainer(trainerId, dataToUpdate) {
         const { nombre, apellido, especialidad, descripcion, precio, imagen } = dataToUpdate;
-        console.log('data a actualizar', dataToUpdate);
     
         const updateFields = [];
         const queryParams = [];

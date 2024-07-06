@@ -23,7 +23,6 @@ export default class UsersControllers {
      * @param {Response} res 
      */
     getAllUsers = async (req, res) => {
-        console.log('buscando los usuarios')
         try {
 
             // Verificar y decodificar el token JWT del encabezado de autorización
@@ -107,7 +106,6 @@ export default class UsersControllers {
         }
         if (password.trim() !== "" && password2.trim() !== "") {
             if (password !== password2) {
-                console.log('Passwords do not match');
                 return res.status(400).json({ error: 'Las contraseñas no coinciden' });
             } else {
                 const hash = bcrypt.hashSync(password, 10);
@@ -135,28 +133,9 @@ export default class UsersControllers {
             res.status(500).json({ error: 'Error al actualizar el usuario' });
         }
     };
-    
-    // updateClass = async (req, res) => {
-    //     const { id, classId } = req.params;
-    //     console.log('los params', req.params); 
-    //     try {
-    //         const result = await this.db.addclass(id, classId);
-
-    //         if (result.affectedRows === 0) {
-    //             return res.status(404).json({ error: 'Usuario no encontrado' });
-    //         }
-
-    //         res.json({ message: 'Clase actualizada con éxito', result });
-    //     } catch (error) {
-    //         console.error('Error al actualizar la clase:', error);
-    //         res.status(500).json({ error: 'Error al actualizar la clase' });
-    //     }
-    // };
 
     deleteUser = async (req, res) => {
         const { id } = req.params
-        console.log('borrando')
-        console.log(id)
         const result = await this.db.deleteUser(id)
         res.json(result)
     }

@@ -15,28 +15,22 @@ export default class SessionControllers {
 
 
     register = async (req, res) => {
-        console.log('Request body:', req.body);
         try {
             const { dni, name, lastname, email, age, password, password2 } = req.body;
-            console.log('Values:', { dni, name, lastname, email, age, password, password2 });
     
             if (!dni || !name || !lastname || !email || !age || !password || !password2) {
-                console.log('Missing fields');
                 return res.status(400).json({ error: 'Todos los campos son obligatorios' });
             }
     
             if (isNaN(age)) {
-                console.log('Age is not a number');
                 return res.status(400).json({ error: 'La edad debe ser un número' });
             }
     
             if (isNaN(dni)) {
-                console.log('DNI is not a number');
                 return res.status(400).json({ error: 'El DNI debe ser un número' });
             }
     
             if (password !== password2) {
-                console.log('Passwords do not match');
                 return res.status(400).json({ error: 'Las contraseñas no coinciden' });
             }
     
@@ -44,10 +38,8 @@ export default class SessionControllers {
             if (!userExist) {
                 const hash = bcrypt.hashSync(password, 10);
                 const result = await this.db.addUser({ dni, name, lastname, email, age, password: hash });
-                console.log('User registered:', result);
                 return res.status(200).json({ message: 'Usuario registrado correctamente', data: result });
             } else {
-                console.log('Email already exists');
                 return res.status(400).json({ error: 'Ya existe un usuario con ese email registrado' });
             }
         } catch (error) {
@@ -57,16 +49,10 @@ export default class SessionControllers {
     };
     
     
-    
-    
-    
-
-    
     login = async (req, res) => {
         const { email, password } = req.body;
         try {
             if (!email || !password) {
-                console.log('Missing fields');
                 return res.status(400).json({ error: 'Todos los campos son obligatorios' });
             }
             if (email === process.env.ADMIN_EMAIL) {

@@ -21,7 +21,6 @@ export default class TrainersControllers {
      * @param {Response} res 
      */
     getAllTrainers = async (req, res) => {
-        console.log('buscando los entrenadores')
         try {
             // Verificar y decodificar el token JWT del encabezado de autorización
             const token = req.headers.authorization.split(' ')[1]; // Obtener el token del encabezado
@@ -46,10 +45,8 @@ export default class TrainersControllers {
     }
 
     updateTrainer = async (req, res) => {
-        // const trainerId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
         const { idTrainer, nombre, apellido, especialidad, descripcion, precio } = req.body;
-        console.log(req.body); // Datos actualizados del usuario: solo plan
-        const imagenPath = req.file ? req.file.path : null; // Obtener la ruta de la imagen si se cargó
+        const imagenPath = req.file ? req.file.path : null; 
     
         // Crear objeto con los datos a actualizar
         const trainerData = {};
@@ -98,8 +95,6 @@ export default class TrainersControllers {
 
     deleteTrainer = async (req, res) => {
         const { id } = req.params
-        console.log('borrando')
-        console.log(id)
         const result = await this.db.deleteTrainer(id)
         res.json(result)
     }

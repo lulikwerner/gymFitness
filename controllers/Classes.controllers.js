@@ -13,10 +13,8 @@ export default class ClassesControllers {
 
     getClass = async (req, res) => {
         const { id } = req.params;
-        console.log('los params', req.params); 
         try {
             const result = await this.db.getClasses(id);
-            console.log(result);
             if (result.affectedRows === 0) {
                 return res.status(404).json({ error: 'Usuario no encontrado' });
             }
@@ -30,7 +28,6 @@ export default class ClassesControllers {
     
     updateClass = async (req, res) => {
         const { id, classId } = req.params;
-        console.log('los params', req.params); 
         try {
             const result = await this.db.addClass(id, classId);
 
@@ -47,7 +44,6 @@ export default class ClassesControllers {
 
     deleteClass = async (req, res) => {
         const { id } = req.params
-        console.log(id)
         const result = await this.db.deleteClass(id)
         res.json(result)
     }

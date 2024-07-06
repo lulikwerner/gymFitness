@@ -197,7 +197,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const data = await response.json();
-        console.log(data);
         const planDisplay = document.querySelector('.planDisplay');
         planDisplay.innerHTML =     `<tr>
                                         <th>ID</th>

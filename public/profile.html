@@ -37,9 +37,29 @@
 
             </div>
             <div class="userClassContainer">
-
+                <h2>Clases</h2>
+                <div class="form-class">
+                    <label for="class">Seleccionar una clase:</label>
+                    <select id="class" name="class" required>
+                        <option value="6">Boxeo</option>
+                        <option value="5">Boxeo Sauna</option>
+                        <option value="7">Yoga</option>
+                        <option value="8">BodyBuilding</option>
+                    </select>
+                    <button class="addUserClass" >Agregar clase</button>
+                </div>
+                <div class="userClassDisplay">
+                    <table class="userClass">
+                        <tr>
+                            <th>Clase</th>
+                            <th>Profesor</th>
+                            <th>Día</th>
+                            <th>Horario</th>
+                            <th>Acción</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-          <!-- Aquí se mostrarán los datos del usuario que traemos desde-->
         </div>
     </main>
     <div class="editUserFormContainer">
@@ -80,15 +100,6 @@
             <div class="editFormButtons">
                 <input type="submit" value="Editar" class="editUserButton">
                 <button type="button" class="cancelEdit">Cancelar</button>
-            </div>
-        </form>
-    </div>
-    <div class="addUserClassFormContainer">
-        <form class="addUserClassForm" method="POST">
-            <input type="hidden" name="idUser">
-            <div class="editFormButtons">
-                <input type="submit" value="Editar" class="addUserClassButton">
-                <button class="cancelEdit">Cancelar</button>
             </div>
         </form>
     </div>

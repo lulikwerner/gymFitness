@@ -34,18 +34,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <p><span>Plan:</span> ${user.nombre_plan}</p>
                 <button class="showUpdateUserFormContainer" data-type="user" data-user="${user.iduser}">Modificar datos</button>
             </div>`;
-        userClassContainer.innerHTML = `
-            <h2>Clases</h2>
-            <div class="form-class">
-                <label for="class">Seleccionar una clase:</label>
-                <select id="class" name="class" required>
-                    <option value="6">Boxeo</option>
-                    <option value="5">Boxeo Sauna</option>
-                    <option value="7">Yoga</option>
-                    <option value="8">BodyBuilding</option>
-                </select>
-                <button class="addUserClass" >Agregar clase</button>
-            </div>`;
 
         const editUserFormContainer = document.querySelector('.editUserFormContainer');
         const editUserForm = document.getElementById('editUserForm');
@@ -114,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const classId = selectedOption.value;
 
             try {
-                const responseClass = await fetch(`/api/users/${userId}/class/${classId}`, {  // Usar userId en la URL
+                const responseClass = await fetch(`/api/classes/${userId}/class/${classId}`, {  // Usar userId en la URL
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -138,6 +126,40 @@ document.addEventListener('DOMContentLoaded', async () => {
                 alert('Error al agregar clase. Consulta la consola para más detalles.');
             }
         });
+
+        try {
+            const response = await fetch(`/api/classes/${user.iduser}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Error al obtener datos del perfil');
+            }
+
+            const userClassTable = document.querySelector(".userClass");
+            const data = await response.json();
+            console.log(data);
+            data.result.forEach(results => {
+                const classRow = document.createElement('tr');
+                classRow.classList.add('card');
+                classRow.innerHTML = `
+                    <td>${results.name}</td>
+                    <td>${results.nombre} ${results.apellido}</td>
+                    <td>${results.dia_semana}</td>
+                    <td>${results.horaclase}</td>
+                    <td>
+                        <button class="btn-delete" data-plan-id=" ">Desuscribirse</button>
+                    </td>
+                `;
+                userClassTable.append(classRow);
+            });
+        }
+        catch (error) {
+            console.error('Error al obtener datos del perfil:', error);
+            alert('Error al obtener datos del perfil. Consulta la consola para más detalles.');
+        }
 
     } catch (error) {
         console.error('Error al obtener datos del perfil:', error);

@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             editUserForm.querySelector('input[name="name"]').value = user.name;
             editUserForm.querySelector('input[name="lastname"]').value = user.lastname;
             editUserForm.querySelector('input[name="age"]').value = user.age;
-            editUserForm.querySelector('input[name="especialidad"]').value = user.nombre_plan;
+            editUserForm.querySelector('select[name="plan"]').value = user.fk_idplan;
         });
 
         const addUserClass = document.querySelector(".addUserClass");

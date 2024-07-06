@@ -4,6 +4,7 @@ import { decodeToken } from '../config/jwtUtils.js';
 //import User from '../models/Users.js'
 import UsersDaoMysql from '../db/daos/users.dao.mysql.js'
 import UsersHelpers from '../helpers/users.helpers.js'
+import bcrypt from 'bcryptjs'
 
 
 export default class UsersControllers {
@@ -88,8 +89,8 @@ export default class UsersControllers {
 
     updateUser = async (req, res) => {
         const userId = req.params.id; // Obtener el ID del usuario de los parámetros de la URL
-        const { name, lastname, age, plan, password, password2, imagen } = req.body; // Datos actualizados del usuario: solo plan
-        const imagenPath = req.file ? `/assets/img/uploads/${req.file.filename}` : null; // Obtener la ruta de la imagen si se cargó
+        const { name, lastname, age, plan, password, password2 } = req.body; // Datos actualizados del usuario: solo plan
+        const imagen = req.file ? `/assets/img/uploads/${req.file.filename}` : null; // Obtener la ruta de la imagen si se cargó
     
         // Crear objeto con los datos a actualizar
         const userData = {};
@@ -116,8 +117,6 @@ export default class UsersControllers {
         if (plan) {
             userData.plan = plan;
         }
-
-    
         // Actualizar userData con la ruta de la imagen si se proporcionó
         if (imagen) {
           console.log('Archivo subido:', req.file);

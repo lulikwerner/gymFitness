@@ -74,32 +74,28 @@ export default class UsersDaoMysql extends MySql {
         const updateFields = [];
         const queryParams = [];
         
-        if (plan !== undefined) {
-            updateFields.push('fk_idplan = ?');
-            queryParams.push(plan);
+        if (name !== undefined) {
+            updateFields.push('name = ?');
+            queryParams.push(name);
+        }
+        if (lastname !== undefined) {
+            updateFields.push('lastname = ?');
+            queryParams.push(lastname);
+        }
+        if (age !== undefined) {
+            updateFields.push('age = ?');
+            queryParams.push(age);
         }
         if (plan !== undefined) {
             updateFields.push('fk_idplan = ?');
             queryParams.push(plan);
         }
-        if (plan !== undefined) {
-            updateFields.push('fk_idplan = ?');
-            queryParams.push(plan);
+        if (password !== undefined) {
+            updateFields.push('password = ?');
+            queryParams.push(password);
         }
-        if (plan !== undefined) {
-            updateFields.push('fk_idplan = ?');
-            queryParams.push(plan);
-        }
-        if (plan !== undefined) {
-            updateFields.push('fk_idplan = ?');
-            queryParams.push(plan);
-        }
-    
         if (imagen !== undefined) {
-            if (imagen === '') {
-                updateFields.push('imagen = ?');
-                queryParams.push('assets/img/users/persona.jpg'); // Ruta de imagen por defecto si no se proporciona ninguna
-            } else {
+            if (imagen !== '') {
                 updateFields.push('imagen = ?');
                 queryParams.push(imagen);
             }

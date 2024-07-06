@@ -109,6 +109,7 @@ button{
     border: 1px solid black;
     color: black;
     transition: color .5s ease, background-color .5s ease;
+    cursor: pointer;
 }
 
 .logOut:hover, #updateButton:hover, .editUserButton:hover,

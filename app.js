@@ -26,12 +26,14 @@ const formRouter = new FormRouter();
 const trainerRouter = new TrainerRouter();
 const planRouter = new PlanRouter();
 
+
 //app.use('/auth', authRoutes)
 app.use("/api/sessions", sessionRouter.getRouter());
 app.use("/api/users", userRouter.getRouter());
 app.use("/api/form", formRouter.getRouter());
 app.use("/api/trainers", trainerRouter.getRouter());
 app.use("/api/plans", planRouter.getRouter());
+
 
 app.listen(PORT,() =>{
     console.clear()

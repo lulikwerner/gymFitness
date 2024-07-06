@@ -20,6 +20,7 @@ export default class UserRoutes extends Routes {
             .get('/:email', privacy(['PRIVATE']),this.controller.getUserByID) 
             .post('/', privacy(['NO_AUTH','PRIVATE']),this.controller.addUser)
             .put('/:id', upload.single('avatar'), privacy(['PRIVATE']), this.controller.updateUser)
+            .put('/:id/class/:classId', privacy(['PRIVATE']), this.controller.updateClass )
             .delete('/:id', privacy(['ADMIN']), this.controller.deleteUser);
         return this.router;
     }

@@ -1,8 +1,6 @@
 import multer from 'multer';
 import path from 'path';
 
-console.log("Configurando almacenamiento de Multer...");
-console.log("Este mensaje debería mostrarse en la consola");
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,7 +13,6 @@ const storage = multer.diskStorage({
     }
 });
 
-console.log("Middleware de Multer configurado correctamente.");
 
 // Middleware de Multer para la carga de archivos
 const upload = multer({ storage: storage });

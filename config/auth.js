@@ -7,7 +7,6 @@ dotenv.config();
 export const privacy = (privacyType) => {
   return (req, res, next) => {
     const token = cookieExtractor(req) || req.headers.authorization?.split(' ')[1];
-    console.log('Token recibido:', token);
 
     if (!token) {
       // Si no hay token, redirigir según el caso de NO_AUTH
@@ -26,7 +25,7 @@ export const privacy = (privacyType) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRETKEY);
       const user = decoded; // Aquí deberías tener los datos del usuario decodificados
 
-      console.log('Datos del usuario:', user);
+
 
       // Verificar cada tipo de acceso en privacyType
       if (privacyType.includes('PRIVATE')) {

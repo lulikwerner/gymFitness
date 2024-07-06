@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    let userId;  // Declarar la variable userId
 
     try {
         const response = await fetch('/api/users/profile', {
@@ -16,12 +17,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const data = await response.json();
         const user = data.user;
+        userId = user.iduser;  // Asignar el valor de userId
 
-        // Mostrar la información del usuario en el HTML
         const userProfileContainer = document.querySelector('.userProfileContainer');
         const userClassContainer = document.querySelector(".userClassContainer");
-        const imageUrl = user.imagen.replace('public', '..').replace(`\ `,"/");
-        console.log('laimagendelusuario',imageUrl)
+        const imageUrl = user.imagen.replace('public', '..').replace(/\ /g,"/");
         userProfileContainer.innerHTML = `
             <div class="profileImg">
                 <img src="${imageUrl}" alt="Imagen de perfil">
@@ -32,26 +32,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <p><span>Email:</span> ${user.email}</p>
                 <p><span>Edad:</span> ${user.age}</p>
                 <p><span>Plan:</span> ${user.nombre_plan}</p>
-                <button class="showUpdateUserFormContainer" data-user="${user.iduser}">Modificar datos</button>
+                <button class="showUpdateUserFormContainer" data-type="user" data-user="${user.iduser}">Modificar datos</button>
             </div>`;
         userClassContainer.innerHTML = `
             <h2>Clases</h2>
-            <div class="form-group">
+            <div class="form-class">
                 <label for="class">Seleccionar una clase:</label>
                 <select id="class" name="class" required>
-                    <option value="Boxeo">Boxeo</option>
-                    <option value="Boxeo_sauna">Boxeo Sauna</option>
-                    <option value="Yoga">Yoga</option>
-                    <option value="Bodybuild">BodyBuilding</option>
+                    <option value="6">Boxeo</option>
+                    <option value="5">Boxeo Sauna</option>
+                    <option value="7">Yoga</option>
+                    <option value="8">BodyBuilding</option>
                 </select>
-                <button class="addUserClass">Agregar clase</button>
+                <button class="addUserClass" >Agregar clase</button>
             </div>`;
 
-        const showUpdateUserFormContainer = document.querySelector(".showUpdateUserFormContainer");
         const editUserFormContainer = document.querySelector('.editUserFormContainer');
-        const editUserForm = document.querySelector('.editUserForm');
+        const editUserForm = document.getElementById('editUserForm');
         const cancelEditButton = document.querySelector('.cancelEdit');
 
+        const showUpdateUserFormContainer = document.querySelector(".showUpdateUserFormContainer");
         showUpdateUserFormContainer.addEventListener("click", () => {
             editUserFormContainer.style.display = "flex"
             editUserForm.querySelector('input[name="idUser"]').value = user.iduser;
@@ -61,40 +61,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             editUserForm.querySelector('select[name="plan"]').value = user.fk_idplan;
         });
 
-        const addUserClass = document.querySelector(".addUserClass");
-        const addUserClassFormContainer = document.querySelector(".addUserClassFormContainer");
-
-        addUserClass.addEventListener("click", () => {
-            addUserClassFormContainer.style.display = "flex"
-        });
-
-        // Escuchar el evento submit del formulario editUserForm
         editUserForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const formData = new FormData(editUserForm);
-            const formDataJSON = Object.fromEntries(formData.entries());
-            console.log('formData', formData)
-            const avatarInput = document.getElementById('avatar');
-            console.log(avatarInput)
+            const userType = showUpdateUserFormContainer.dataset.type;
+            const endpoint = userType === 'user' ? `/api/users/${user.iduser}` : `/api/classes/${user.iduser}`;
+
             try {
-                // Realizar la solicitud PUT utilizando fetch
-                const putResponse = await fetch(`/api/users/${formDataJSON.idUser}`, {
+                const putResponse = await fetch(endpoint, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
                     body: formData,
                 });
-        
-                // Manejar la respuesta del servidor
+
                 if (putResponse.ok) {
                     const result = await putResponse.json();
                     console.log('Resultado de la solicitud PUT:', result);
-        
+
                     alert('Los cambios fueron realizados');
                     editUserFormContainer.style.display = 'none';
-                    // Recargar la página después de 1 segundo para reflejar los cambios
                     setTimeout(() => {
                         window.location.reload();
                     }, 1000);
@@ -111,15 +99,48 @@ document.addEventListener('DOMContentLoaded', async () => {
                 alert('Hubo un error en la solicitud PUT. Consulta la consola para más detalles.');
             }
         });
-        
-        // Event listener para el botón de cancelar en el formulario de edición
+
         cancelEditButton.addEventListener('click', (e) => {
             e.preventDefault();
             editUserFormContainer.style.display = 'none';
         });
+
+        const addUserClassButton = document.querySelector(".addUserClass");
+        const addUserClassFormContainer = document.querySelector(".addUserClassFormContainer");
+
+        addUserClassButton.addEventListener("click", async () => {
+            const classSelect = document.getElementById('class');
+            const selectedOption = classSelect.options[classSelect.selectedIndex];
+            const classId = selectedOption.value;
+
+            try {
+                const responseClass = await fetch(`/api/users/${userId}/class/${classId}`, {  // Usar userId en la URL
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (responseClass.ok) {
+                    const resultClass = await responseClass.json();
+                    console.log('Resultado de la solicitud PUT de clase:', resultClass);
+                    // Manejar respuesta de agregar clase aquí si es necesario
+                } else {
+                    const resultClass = await responseClass.json();
+                    if (resultClass && resultClass.error) {
+                        alert(`Error al agregar clase: ${resultClass.error}`);
+                    } else {
+                        alert('Error desconocido al procesar la solicitud.');
+                    }
+                }
+            } catch (error) {
+                console.error('Error al agregar clase:', error);
+                alert('Error al agregar clase. Consulta la consola para más detalles.');
+            }
+        });
+
     } catch (error) {
         console.error('Error al obtener datos del perfil:', error);
         alert('Error al obtener datos del perfil. Consulta la consola para más detalles.');
     }
-
 });

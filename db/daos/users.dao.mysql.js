@@ -118,4 +118,16 @@ export default class UsersDaoMysql extends MySql {
         const [result] = await this.connection.promise().query(query, [id]);
         return result;
     }
+
+    async addclass(id, classId) {
+        const query = `INSERT INTO usersClass (iduser, idclase) VALUES (?, ?)`;
+        try {
+            const [result] = await this.connection.promise().query(query, [id, classId]);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    
 }

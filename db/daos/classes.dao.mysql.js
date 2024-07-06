@@ -7,7 +7,7 @@ export default class ClassesDaoMysql extends MySql {
     }
 
     async getClasses(id){
-        const query = `SELECT p.nombre, p.apellido, c.horaclase, c.dia_semana, c.name FROM ${this.table} u
+        const query = `SELECT p.nombre, p.apellido, c.idclase, c.horaclase, c.dia_semana, c.name FROM ${this.table} u
          INNER JOIN class c ON c.idclase = u.idclase INNER JOIN personal_trainer p ON p.idpersonal = c.idpersonal
          WHERE u.iduser = ?`;
         const [result] = await this.connection.promise().query(query, [id]);
@@ -23,5 +23,16 @@ export default class ClassesDaoMysql extends MySql {
         } catch (error) {
             throw error;
         }
-    }    
+    }
+    
+    async deleteClass(id){
+        const query = `
+                        DELETE u FROM usersClass u
+                        INNER JOIN class c ON c.idclase = u.idclase
+                        WHERE u.idclase = ?
+                    `;
+        const [result] = await this.connection.promise().query(query, [id]);
+        console.log(result);
+        return result;
+    }
 }

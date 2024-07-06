@@ -153,11 +153,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${results.dia_semana}</td>
                     <td>${results.horaclase}</td>
                     <td>
-                        <button class="btn-delete" data-plan-id=" ">Desuscribirse</button>
+                        <button class="btn-delete" data-clase-id="${results.idclase}">Desuscribirse</button>
                     </td>
                 `;
                 userClassTable.append(classRow);
+                const btnDeleteClass = classRow.querySelector('.btn-delete');
+                btnDeleteClass.addEventListener('click', async () => {
+                    const classId = btnDeleteClass.getAttribute('data-clase-id');
+                    if (window.confirm('¿Estás seguro de que quieres desuscribirte esta clase?')) {
+                        try {
+                            const deleteResponse = await fetch(`/api/classes/${classId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`
+                                }
+                            });
+
+                            if (!deleteResponse.ok) {
+                                throw new Error('Error al intentar borrar la clase');
+                            }
+                            // Eliminar la fila del usuario borrado
+                            classRow.remove(); 
+                            alert('Desuscribido de la clase correctamente');
+                            location.reload();
+                        } catch (error) {
+                            console.error('Error al borrar la clase:', error);
+                            alert('Error al intentar desuscribirse de la clase');
+                        }
+                    }
+                });
             });
+
         }
         catch (error) {
             console.error('Error al obtener datos del perfil:', error);

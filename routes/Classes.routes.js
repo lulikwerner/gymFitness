@@ -16,6 +16,7 @@ export default class ClassRoutes extends Routes {
         this.router
             .get('/:id', privacy(['PRIVATE']), this.controller.getClass)
             .put('/:id/class/:classId', privacy(['PRIVATE']), this.controller.updateClass)
+            .delete('/:id', privacy(['PRIVATE']), this.controller.deleteClass)
         return this.router;
     }
 }

@@ -44,5 +44,12 @@ export default class ClassesControllers {
             res.status(500).json({ error: 'Error al actualizar la clase' });
         }
     };
+
+    deleteClass = async (req, res) => {
+        const { id } = req.params
+        console.log(id)
+        const result = await this.db.deleteClass(id)
+        res.json(result)
+    }
 }
 

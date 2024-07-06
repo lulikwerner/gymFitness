@@ -111,8 +111,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (responseClass.ok) {
                     const resultClass = await responseClass.json();
-                    console.log('Resultado de la solicitud PUT de clase:', resultClass);
-                    // Manejar respuesta de agregar clase aquí si es necesario
+                    alert(`La clase fue agregada`);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+        
                 } else {
                     const resultClass = await responseClass.json();
                     if (resultClass && resultClass.error) {
@@ -123,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } catch (error) {
                 console.error('Error al agregar clase:', error);
-                alert('Error al agregar clase. Consulta la consola para más detalles.');
+                alert('Ya estas inscripto en esa clase');
             }
         });
 
